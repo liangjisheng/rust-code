@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "product-management",
+    "order-management",
+    "user-management"
+]

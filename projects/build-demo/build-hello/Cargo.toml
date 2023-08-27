@@ -1,0 +1,14 @@
+[package]
+name = "build-hello"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# 非常有用的一个字段，如果要自定义自己的构建工作流，
+# 尤其是要调用外部工具来构建其他本地语言（C、C++、D等）开发的软件包时。
+# 这时，自定义的构建流程可以使用rust语言，写在"build.rs"文件中。
+build = "build.rs"
+
+[dependencies]
+

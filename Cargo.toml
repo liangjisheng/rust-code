@@ -1,0 +1,84 @@
+[package]
+name = "hello"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# 显式声明软件包文件夹内哪些文件被排除在项目的构建流程之外，
+# 哪些文件包含在项目的构建流程中
+#exclude = ["build/**/*.o", "doc/**/*.html"]
+#include = ["src/**/*", "Cargo.toml"]
+
+# 当软件包在向公共仓库发布时出现错误时，使能此字段可以阻止此错误。
+#publish = false
+
+# 关于软件包的一个简短介绍。
+#description = "..."
+
+# 下面这些字段标明了软件包仓库的更多信息
+#documentation = "..."
+#homepage = "..."
+#repository = "..."
+
+# 顾名思义，此字段指向的文件就是传说中的ReadMe，
+# 并且，此文件的内容最终会保存在注册表数据库中。
+#readme = "..."
+
+# 用于分类和检索的关键词
+#keywords = ["...", "..."]
+
+# 软件包的许可证，必须是cargo仓库已列出的已知的标准许可证。
+#license = "..."
+
+# 软件包的非标许可证书对应的文件路径
+#license-file = "..."
+
+#修改默认的入口
+default-run = "hello"
+
+[dependencies]
+color = { git = "https://github.com/bjz/color-rs" }
+#依赖本地 lib
+#geometry = { path = "crates/geometry" }
+rand = { version = "0.8.0" }
+ferris-says = "0.2"
+time = "0.3.5"
+regex = "1.5.4"
+async-std = { version = "1.12.0", features = ["attributes"] }
+futures = "0.3.28"
+clap_builder = "4.3.10"
+serde = "1.0.171"
+serde_json = "1.0.100"
+serde_derive = "1.0.171"
+config = "0.13.3"
+toml = "0.7.6"
+lazy_static = "1.4.0"
+anyhow = "1.0.75"
+
+#依赖来自于不同注册服务的同名包
+#需要的就是这个 foo package，虽然它被重命名为 bar 或 baz
+#foo = "0.1"
+#bar = { git = "https://github.com/example/project", package = "foo" }
+#baz = { version = "0.1", registry = "custom", package = "foo" }
+
+#如果没有在Cargo.toml里定义集成测试的入口，那么tests目录(不包括子目录)下的每个rs文件被当作集成测试入口.
+#如果在Cargo.toml里定义了集成测试入口，那么定义的那些rs就是入口，不再默认指定任何集成测试入口
+
+[[test]]
+name = "test1"
+path = "tests/test1.rs"
+
+[[test]]
+name = "test2"
+path = "tests/test2.rs"
+
+#cargo run --example NAME
+[[example]]
+name = "ex1"
+path = "examples/ex1.rs"
+
+#cargo run —-bin NAME
+[[bin]]
+name = "bin1"
+path = "src/bin/bin1.rs"
