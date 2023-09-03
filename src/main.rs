@@ -1,9 +1,16 @@
 use futures::executor::block_on;
 use rand::{thread_rng, Rng};
 
+mod my_lib;
+mod school;
+
 fn main() {
-    test_future();
-    test_rand();
+    // test_future();
+    // test_rand();
+
+    my_lib::show_1(1);
+    school::student::say();
+    school::student::util::hello_util();
 }
 
 async fn print_async() {

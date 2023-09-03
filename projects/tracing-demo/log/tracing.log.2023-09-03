@@ -1,0 +1,24 @@
+2023-09-03T17:33:58.897 TRACE test_trace{n=33}: tracing_demo: trace2: test_trace answer=42
+2023-09-03T17:33:58.897 TRACE test_trace{n=33}: tracing_demo: trace1: test_trace answer=42
+2023-09-03T17:33:58.897  INFO test_trace{n=33}: tracing_demo: info1: test_trace answer=42
+2023-09-03T17:33:58.897 TRACE tracing_demo: tracing-trace
+2023-09-03T17:33:58.897 DEBUG tracing_demo: tracing-debug
+2023-09-03T17:33:58.897  INFO tracing_demo: tracing-info
+2023-09-03T17:33:58.897  WARN tracing_demo: tracing-warn
+2023-09-03T17:33:58.897 ERROR tracing_demo: tracing-error
+2023-09-03T18:00:37.324 TRACE test_trace{n=33}: tracing_demo: 32: trace2: test_trace answer=42
+2023-09-03T18:00:37.324 TRACE test_trace{n=33}: tracing_demo: 33: trace1: test_trace answer=42
+2023-09-03T18:00:37.324  INFO test_trace{n=33}: tracing_demo: 34: info1: test_trace answer=42
+2023-09-03T18:00:37.324 TRACE tracing_demo: 70: tracing-trace
+2023-09-03T18:00:37.324 DEBUG tracing_demo: 71: tracing-debug
+2023-09-03T18:00:37.324  INFO tracing_demo: 72: tracing-info
+2023-09-03T18:00:37.324  WARN tracing_demo: 73: tracing-warn
+2023-09-03T18:00:37.324 ERROR tracing_demo: 74: tracing-error
+2023-09-03T18:02:28.713 TRACE test_trace{n=33}: tracing_demo: src/main.rs:32: trace2: test_trace answer=42
+2023-09-03T18:02:28.713 TRACE test_trace{n=33}: tracing_demo: src/main.rs:33: trace1: test_trace answer=42
+2023-09-03T18:02:28.713  INFO test_trace{n=33}: tracing_demo: src/main.rs:34: info1: test_trace answer=42
+2023-09-03T18:02:28.713 TRACE tracing_demo: src/main.rs:72: tracing-trace
+2023-09-03T18:02:28.713 DEBUG tracing_demo: src/main.rs:73: tracing-debug
+2023-09-03T18:02:28.713  INFO tracing_demo: src/main.rs:74: tracing-info
+2023-09-03T18:02:28.713  WARN tracing_demo: src/main.rs:75: tracing-warn
+2023-09-03T18:02:28.713 ERROR tracing_demo: src/main.rs:76: tracing-error

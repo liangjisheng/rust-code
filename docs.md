@@ -1,20 +1,5 @@
 # rust
 
-[rust 学习资源](https://juejin.cn/post/7194422977872527397)
-[rust 官网](https://www.rust-lang.org/)
-[Rust 官方文档](https://doc.rust-lang.org/)  
-[Rust 在线工具](https://play.rust-lang.org/)  
-[Rust Github 地址](https://github.com/rust-lang/rust)
-[Rust 中文社区](https://github.com/rustcc)
-[RustCn 社区](https://github.com/rustlang-cn)
-[rustup 项目主页](https://github.com/rust-lang-nursery/rustup.rs)
-[rust](https://prev.rust-lang.org/zh-CN/documentation.html)
-
-## github
-
-[rust learning](https://github.com/ctjhoa/rust-learning)
-[chinanf-boy](https://github.com/chinanf-boy)
-
 install (需要科学上网)
 
 ```shell
@@ -53,10 +38,12 @@ cargo build --bin xxx
 #运行某个 binary crate
 cargo run --bin package-name
 cargo run --bin xxx
+
+cargo run --example ex1
+
+#生成 crate 文档并打开
+cargo doc --open
+
+#添加依赖并开始相应的 features
+cargo add tokio --features full
 ```
-
-## articles
-
-[cargo](https://course.rs/cargo/intro.html)
-[cargo](https://www.bookstack.cn/read/RustPrimer/cargo-detailed-cfg-cargo-detailed-cfg.md)
-[features](https://course.rs/cargo/reference/features/intro.html)
