@@ -8,9 +8,9 @@ fn main() {
     // test_future();
     // test_rand();
 
-    my_lib::show_1(1);
-    school::student::say();
-    school::student::util::hello_util();
+    // my_lib::show_1(1);
+    // school::student::say();
+    // school::student::util::hello_util();
 }
 
 async fn print_async() {
@@ -34,4 +34,12 @@ fn test_rand() {
     let x: u32 = rng.gen();
     println!("{}", x);
     println!("{:?}", rng.gen::<(f64, bool)>());
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
 }

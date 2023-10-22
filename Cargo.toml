@@ -55,6 +55,7 @@ config = "0.13.3"
 toml = "0.7.6"
 lazy_static = "1.4.0"
 anyhow = "1.0.75"
+crossbeam = "0.8.2"
 
 #依赖来自于不同注册服务的同名包
 #需要的就是这个 foo package，虽然它被重命名为 bar 或 baz

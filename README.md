@@ -4,9 +4,8 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
+[rust](https://blog.csdn.net/weixin_46463785/article/details/129218227)
 [rust](https://kaisery.github.io/trpl-zh-cn/)
-[trait 标准库](https://www.zhihu.com/people/tony-folly/posts?page=1)
-
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 [Rust 语言实战](https://zh.practice.rs/why-exercise.html)
 [Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
@@ -17,17 +16,16 @@ tonic: n. 补药, adj. 滋补的
 
 ## web
 
+[axum](https://juejin.cn/post/7233196954401636410)
+[axum](https://github.com/tokio-rs/axum)
 [hyper](https://hyper.rs/)
 [hyper](https://github.com/hyperium/hyper)
-[actix](https://actix.rs/)
-[actix](https://github.com/actix/actix)
+[rocket](https://rocket.rs/)
+[rocket](https://github.com/SergioBenitez/Rocket)
 [tide](https://blog.csdn.net/kk3909/article/details/107202731)
 [tide](https://github.com/http-rs/tide)
 [wrap](https://blog.csdn.net/kk3909/article/details/107219815)
-[axum](https://juejin.cn/post/7233196954401636410)
-
-[web](https://blog.csdn.net/weixin_46463785/category_12155724.html)
-[web](https://juejin.cn/post/7226904491050795045)
+[wrap](https://github.com/seanmonstar/warp)
 
 go 调用 rust 代码
 

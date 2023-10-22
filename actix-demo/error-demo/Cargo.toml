@@ -1,0 +1,30 @@
+[package]
+name = "error-demo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+default-run = "error-demo"
+
+[dependencies]
+actix-web = "4"
+derive_more = "0.99.17"
+env_logger = "0.9.0"
+log = "0.4"
+
+[[bin]]
+name = "err1"
+src = "src/bin/err1.rs"
+
+[[bin]]
+name = "err2"
+src = "src/bin/err2.rs"
+
+[[bin]]
+name = "err3"
+src = "src/bin/err3.rs"
+
+[[bin]]
+name = "err4"
+src = "src/bin/err4.rs"
