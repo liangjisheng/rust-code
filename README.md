@@ -4,8 +4,7 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust](https://blog.csdn.net/weixin_46463785/article/details/129218227)
-[rust](https://kaisery.github.io/trpl-zh-cn/)
+[rust](https://kaisery.github.io/trpl-zh-cn/ch10-00-generics.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 [Rust 语言实战](https://zh.practice.rs/why-exercise.html)
 [Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
@@ -16,20 +15,29 @@ tonic: n. 补药, adj. 滋补的
 
 ## web
 
-[axum](https://juejin.cn/post/7233196954401636410)
-[axum](https://github.com/tokio-rs/axum)
-[hyper](https://hyper.rs/)
-[hyper](https://github.com/hyperium/hyper)
+star 21.7k
 [rocket](https://rocket.rs/)
 [rocket](https://github.com/SergioBenitez/Rocket)
-[tide](https://blog.csdn.net/kk3909/article/details/107202731)
-[tide](https://github.com/http-rs/tide)
+
+star 12.9k
+[axum](https://juejin.cn/post/7233196954401636410)
+[axum](https://github.com/tokio-rs/axum)
+
+star 12.7k
+[hyper](https://hyper.rs/)
+[hyper](https://github.com/hyperium/hyper)
+
+star 8.4k
 [wrap](https://blog.csdn.net/kk3909/article/details/107219815)
 [wrap](https://github.com/seanmonstar/warp)
 
+star 4.8k
+[tide](https://blog.csdn.net/kk3909/article/details/107202731)
+[tide](https://github.com/http-rs/tide)
+
 go 调用 rust 代码
 
-## rust
+## rust official
 
 [rust 学习资源](https://juejin.cn/post/7194422977872527397)
 [rust 官网](https://www.rust-lang.org/)
