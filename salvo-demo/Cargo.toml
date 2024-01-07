@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "hello",
+    "hello-h3",
+    "todos",
+    "remote-addr",
+    "routing",
+    "request-id",
+    "oapi-hello",
+    "oapi-todos",
+    "multi-servers",
+    "middleware-add-header",
+]
+resolver = "2"

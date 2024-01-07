@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "hello-world",
+    "generate-random-number",
+    "include-html",
+    "handle-head-request",
+    "readme",
+    "global-404-handler",
+    "error-handler",
+    "middleware",
+    "tower-handler",
+    "share-state",
+]
+resolver = "2"

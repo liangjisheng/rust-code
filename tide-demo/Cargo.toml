@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "hello",
+    "json",
+    "error-handling",
+    "middleware",
+    "state",
+]
+resolver = "2"

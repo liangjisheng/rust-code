@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "hello",
+    "routing",
+    "body",
+    "header",
+    "rejections",
+    "futures",
+]
+resolver = "2"

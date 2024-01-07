@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "hello",
+    "echo",
+    "client",
+    "client-json",
+]
+resolver = "2"

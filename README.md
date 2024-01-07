@@ -4,38 +4,37 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust](https://kaisery.github.io/trpl-zh-cn/ch13-00-functional-features.html)
+[Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/ch16-01-threads.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 [Rust 语言实战](https://zh.practice.rs/why-exercise.html)
 [Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
 [Rust 实践指南](https://niqin.com/read/rust-guide/zh-cn/index.html)
 [通过例子学 Rust](https://rustwiki.org/zh-CN/rust-by-example/)
 [RustPrime 中文版](https://rustcc.gitbooks.io/rustprimer/content/)
+[Rust Cookbook 中文版](https://rustwiki.org/zh-CN/rust-cookbook/intro.html)
 [Rust 项目实操](https://www.bilibili.com/video/BV1A24y127iS/)
 
 ## web
 
-star 21.7k
-[rocket](https://rocket.rs/)
-[rocket](https://github.com/SergioBenitez/Rocket)
+[http grpc](https://github.com/programatik29/axum-tonic-server)
+[pretty-env-logger](https://github.com/seanmonstar/pretty-env-logger)
+[http client](https://github.com/seanmonstar/reqwest)
+[http client](https://github.com/http-rs/surf)
+[orm](https://juejin.cn/post/7255513860264919098)
 
-star 12.9k
-[axum](https://juejin.cn/post/7233196954401636410)
-[axum](https://github.com/tokio-rs/axum)
-
-star 12.7k
-[hyper](https://hyper.rs/)
-[hyper](https://github.com/hyperium/hyper)
-
-star 8.4k
-[wrap](https://blog.csdn.net/kk3909/article/details/107219815)
-[wrap](https://github.com/seanmonstar/warp)
-
-star 4.8k
-[tide](https://blog.csdn.net/kk3909/article/details/107202731)
-[tide](https://github.com/http-rs/tide)
+[actix-web star 19.3k](https://github.com/actix/actix-web)
+[axum star 14.2k](https://github.com/tokio-rs/axum)
+[wrap star 8.8k](https://github.com/seanmonstar/warp)
+[salvo star 2.5k](https://github.com/salvo-rs/salvo)
+[tide star 4.8k](https://github.com/http-rs/tide)
 
 go 调用 rust 代码
+
+## data struct and algorithm
+
+[Rust DataStruct And Algorithm](https://github.com/QMHTMY/RustBook)
+[TheAlgorithms](https://github.com/TheAlgorithms/Rust)
+[Rust DataStruct And Algorithm](https://github.com/wangzheng0822/algo)
 
 ## rust official
 

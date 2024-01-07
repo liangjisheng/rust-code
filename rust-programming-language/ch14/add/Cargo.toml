@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    #并通过指定 adder 的路径来为工作空间增加成员
+    "adder",
+    "add_one",
+]
