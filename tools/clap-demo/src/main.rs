@@ -1,9 +1,6 @@
 use clap::Parser;
 use clap::{Arg, Command, Subcommand};
 
-// https://github.com/clap-rs/clap/tree/master/examples
-// https://blog.csdn.net/yhb_csdn/article/details/131162434
-
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

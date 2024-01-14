@@ -96,12 +96,24 @@ fn match3() {
     // 使用 | 符号实现多值匹配
     // 使用 ..= 符号实现范围匹配，注意，之前是使用 ... 现在该方式已废弃
     // _ 符号是匹配穷进行，Rust 要检查所有被覆盖的情况
+
+    // 编译器会在编译时检查范围不为空，而 char 和数字值是 Rust 仅有的可以判断范围是否为空的类型，
+    // 所以范围只允许用于数字或 char 值。
+
     let week_day = 0;
     match week_day {
         1..=4 => println!("周一至周四过的好慢啊..."),
         5 => println!("哇！今天周五啦！"),
         6 | 0 => println!("这两天是周末，休息啦！"),
         _ => println!("每周只有 7 天，请输入正确的值..."),
+    };
+
+    let x = 'c';
+
+    match x {
+        'a'..='j' => println!("early ASCII letter"),
+        'k'..='z' => println!("late ASCII letter"),
+        _ => println!("something else"),
     };
 }
 

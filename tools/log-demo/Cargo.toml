@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "rust-lang-log",
+    "pretty-env-logger-demo",
+    "env-logger-demo",
+]
+resolver = "2"

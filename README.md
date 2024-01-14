@@ -4,29 +4,17 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/ch16-01-threads.html)
+[Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/ch19-06-macros.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 [Rust 语言实战](https://zh.practice.rs/why-exercise.html)
-[Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
 [Rust 实践指南](https://niqin.com/read/rust-guide/zh-cn/index.html)
 [通过例子学 Rust](https://rustwiki.org/zh-CN/rust-by-example/)
 [RustPrime 中文版](https://rustcc.gitbooks.io/rustprimer/content/)
-[Rust Cookbook 中文版](https://rustwiki.org/zh-CN/rust-cookbook/intro.html)
-[Rust 项目实操](https://www.bilibili.com/video/BV1A24y127iS/)
-
-## web
 
 [http grpc](https://github.com/programatik29/axum-tonic-server)
-[pretty-env-logger](https://github.com/seanmonstar/pretty-env-logger)
 [http client](https://github.com/seanmonstar/reqwest)
 [http client](https://github.com/http-rs/surf)
 [orm](https://juejin.cn/post/7255513860264919098)
-
-[actix-web star 19.3k](https://github.com/actix/actix-web)
-[axum star 14.2k](https://github.com/tokio-rs/axum)
-[wrap star 8.8k](https://github.com/seanmonstar/warp)
-[salvo star 2.5k](https://github.com/salvo-rs/salvo)
-[tide star 4.8k](https://github.com/http-rs/tide)
 
 go 调用 rust 代码
 
@@ -58,6 +46,20 @@ go 调用 rust 代码
 
 [awesome](https://juejin.cn/post/7194422977872527397)
 [rust](https://juejin.cn/post/7190293181081059385)
+
+## books
+
+[Rust Cookbook 中文版](https://rustwiki.org/zh-CN/rust-cookbook/intro.html)
+[Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
+[Rust 项目实操](https://www.bilibili.com/video/BV1A24y127iS/)
+
+## web
+
+[actix-web star 19.3k](https://github.com/actix/actix-web)
+[axum star 14.2k](https://github.com/tokio-rs/axum)
+[wrap star 8.8k](https://github.com/seanmonstar/warp)
+[salvo star 2.5k](https://github.com/salvo-rs/salvo)
+[tide star 4.8k](https://github.com/http-rs/tide)
 
 ## blockchain
 

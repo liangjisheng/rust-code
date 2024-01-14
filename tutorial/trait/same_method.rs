@@ -65,6 +65,11 @@ fn main() {
     person.fly();
 
     // Pilot
+    // Pilot::name(); // 编译错误
+    // 因为 Pilot::name 没有 self 参数，同时这可能会有其它类型实现了 Pilot trait，
+    // Rust 无法计算出所需的是哪一个 Pilot::name 实现。我们会得到这个编译错误：
+
+    // 使用完全限定语法消除歧义
     <Human as Pilot>::name();
 
     // Wizard
