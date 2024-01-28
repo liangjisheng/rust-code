@@ -9,8 +9,8 @@ use std::collections::HashMap;
 
 use axum::extract::{Path, Query};
 use axum::{
-    http::StatusCode, response::Html, response::IntoResponse, routing::get, routing::post, Json,
-    Router,
+    http::StatusCode, response::Html, response::IntoResponse, response::Response, routing::get,
+    routing::post, Json, Router,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -29,9 +29,15 @@ async fn main() {
     let app = Router::new()
         .route("/", get(|| async { "Hello, World!" }))
         .route("/hello", get(handler))
+        .route("/p/:uid", get(path))
         .route("/foo", get(get_foo).post(post_foo))
         .route("/hello1", get(handler1))
-        .route("/j1", get(response_json))
+        .route("/j1", get(response_json1))
+        .route("/j2", get(response_json2))
+        .route("/j3", get(response_json3))
+        .route("/j4", get(response_json4))
+        .route("/my", get(my_function))
+        .route("/my1", get(my_function1))
         .route("/users", post(create_user));
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
@@ -70,7 +76,10 @@ async fn post_foo() -> String {
 }
 
 // Path路径，eg. /users/<id>
-async fn path(Path(user_id): Path<u32>) {}
+async fn path(Path(user_id): Path<u32>) -> Json<u32> {
+    println!("user id {}", user_id);
+    Json(user_id)
+}
 
 // Query参数，eg. /users?id=123&name=jim
 async fn query(Query(params): Query<HashMap<String, String>>) {}
@@ -101,14 +110,91 @@ async fn create_user(
 
 // `Json` gives a content-type of `application/json` and works with any type
 // that implements `serde::Serialize`
-async fn response_json() -> Json<Value> {
+async fn response_json1() -> Json<Value> {
     Json(json!({ "data": 42 }))
+}
+
+async fn response_json2() -> Json<String> {
+    Json(String::from("response_json1"))
+}
+
+async fn response_json3() -> Json<Vec<String>> {
+    Json(vec!["string1".to_string(), "string2".to_owned()])
+}
+
+async fn response_json4() -> Json<CreateUser> {
+    let user = CreateUser {
+        username: "alice".to_string(),
+    };
+    Json(user)
+}
+
+#[derive(Serialize)]
+struct Message {
+    message: String,
+}
+
+// 定义了几种 `API` 的响应类型。
+// 1. `OK` 和 `Created` 对应不同的 `HTTP` 状态码;
+// 2. `JsonData` 包装了 `Vec<Message>` 的 `JSON` 数据。
+enum ApiResponse {
+    OK,
+    Created,
+    JsonData(Vec<Message>),
+}
+
+// 这让 `ApiResponse` 可以被自动转换成一个 `axum Response`。
+impl IntoResponse for ApiResponse {
+    fn into_response(self) -> Response {
+        // 检查枚举变量,返回相应的 HTTP 状态码和数据。
+        match self {
+            Self::OK => (StatusCode::OK).into_response(),
+            Self::Created => (StatusCode::CREATED).into_response(),
+            Self::JsonData(data) => (StatusCode::OK, Json(data)).into_response(),
+        }
+    }
+}
+
+async fn my_function() -> ApiResponse {
+    ApiResponse::JsonData(vec![Message {
+        message: "hello message".to_owned(),
+    }])
+}
+
+enum ApiError {
+    BadRequest,
+    Forbidden,
+    Unauthorised,
+    InternalServerError,
+}
+
+impl IntoResponse for ApiError {
+    fn into_response(self) -> Response {
+        match self {
+            ApiError::BadRequest => (StatusCode::BAD_REQUEST).into_response(),
+            ApiError::Forbidden => (StatusCode::FORBIDDEN).into_response(),
+            ApiError::Unauthorised => (StatusCode::UNAUTHORIZED).into_response(),
+            ApiError::InternalServerError => (StatusCode::INTERNAL_SERVER_ERROR).into_response(),
+        }
+    }
+}
+
+async fn my_function1() -> Result<ApiResponse, ApiError> {
+    Ok(ApiResponse::JsonData(vec![Message {
+        message: "hello message".to_owned(),
+    }]))
+    // Err(ApiError::BadRequest)
 }
 
 // curl "http://127.0.0.1:3000/"
 // curl "http://127.0.0.1:3000/hello"
 // curl "http://127.0.0.1:3000/hello1"
+// curl "http://127.0.0.1:3000/p/123"
 // curl "http://127.0.0.1:3000/j1"
+// curl "http://127.0.0.1:3000/j2"
+// curl "http://127.0.0.1:3000/j3"
+// curl "http://127.0.0.1:3000/j4"
+// curl "http://127.0.0.1:3000/my"
 // curl -X GET http://127.0.0.1:3000/foo
 // curl -X POST http://127.0.0.1:3000/foo
 // curl -H "Content-Type: application/json" -d '{"username":"someName"}' -X POST http://127.0.0.1:3000/users

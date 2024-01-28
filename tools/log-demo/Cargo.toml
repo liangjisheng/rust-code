@@ -3,5 +3,6 @@ members = [
     "rust-lang-log",
     "pretty-env-logger-demo",
     "env-logger-demo",
+    "log4rs-demo",
 ]
 resolver = "2"

@@ -77,6 +77,7 @@ fn p3() {
 // match匹配分支必须使用可反驳模式，除了最后一个分支需要使用能匹配任何剩余值的不可反驳模式。
 
 // 也可以使用模式来解构结构体、枚举和元组，以便使用这些值的不同部分。
+#[derive(Debug)]
 struct Point {
     x: i32,
     y: i32,
@@ -147,6 +148,29 @@ fn p5() {
         }
         _ => (),
     }
+}
+
+// 对于数组，我们可以用类似元组的方式解构，分为两种情况
+fn p5_1() {
+    // 定长数组
+    let arr: [u16; 2] = [114, 514];
+    let [x, y] = arr;
+
+    assert_eq!(x, 114);
+    assert_eq!(y, 514);
+
+    // 不定长数组
+    let arr: &[u16] = &[114, 514];
+    if let [x, ..] = arr {
+        assert_eq!(x, &114);
+    }
+    if let &[.., y] = arr {
+        assert_eq!(y, 514);
+    }
+
+    let arr: &[u16] = &[];
+    assert!(matches!(arr, [..]));
+    assert!(!matches!(arr, [x, ..]));
 }
 
 // 可以用复杂的方式来混合、匹配和嵌套解构模式
@@ -301,15 +325,39 @@ fn p10() {
     }
 }
 
+// 使用 @ 还可以在绑定新变量的同时，对目标进行解构
+fn p11() {
+    // 绑定新变量 `p`，同时对 `Point` 进行解构
+    let p @ Point { x: px, y: py } = Point { x: 10, y: 23 };
+    println!("x: {}, y: {}", px, py);
+    println!("{:?}", p);
+
+    let point = Point { x: 10, y: 5 };
+    if let p @ Point { x: 10, y } = point {
+        println!("x is 10 and y is {} in {:?}", y, p);
+    } else {
+        println!("x was not 10 :(");
+    }
+
+    match 1 {
+        num @ (1 | 2) => {
+            println!("{}", num);
+        }
+        _ => {}
+    }
+}
+
 fn main() {
     // p1();
     // p2();
     // p3();
     // p4();
     // p5();
+    // p5_1();
     // p6();
     // p7();
     // p8();
     // p9();
-    p10();
+    // p10();
+    p11();
 }

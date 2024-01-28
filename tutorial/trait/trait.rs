@@ -42,7 +42,7 @@ fn returns_intro() -> impl Person {
     }
 }
 
-fn main() {
+fn t1() {
     let w = Worker {
         name: String::from("ljs"),
         age: 20,
@@ -51,4 +51,33 @@ fn main() {
 
     print_intro(w);
     print_intro(returns_intro());
+}
+
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn t2() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list);
+    println!("The largest number is {}", result);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list);
+    println!("The largest char is {}", result);
+}
+
+fn main() {
+    // t1();
+    t2();
 }

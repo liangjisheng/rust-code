@@ -1,3 +1,11 @@
+// &self 其实是 self: &Self 的简写（注意大小写）。在一个 impl 块内，Self 指代被实现方法的
+// 结构体类型，self 指代此类型的实例
+// 需要注意的是，self 依然有所有权的概念：
+// self 表示 Rectangle 的所有权转移到该方法中，这种形式用的较少
+// &self 表示该方法对 Rectangle 的不可变借用
+// &mut self 表示可变借用
+// 总之，self 的使用就跟函数参数一样，要严格遵守 Rust 的所有权规则
+
 struct User {
     username: String,
     age: i32,
@@ -14,11 +22,27 @@ impl User {
 
 fn struct1() {
     let user1 = User {
-        username: String::from("ljs"),
+        username: String::from("alice"),
         age: 18,
     };
     print!("我是: {}, 永远 {}\n", user1.username, user1.age); // 我是: ljs, 永远 18
     user1.info();
+
+    let user1 = User {
+        username: String::from("alice"),
+        age: 18,
+    };
+
+    // .. 语法表明凡是我们没有显式声明的字段，全部从 user1 中自动获取。
+    // 需要注意的是 ..user1 必须在结构体的尾部使用。
+    let user2 = User { age: 20, ..user1 };
+    user2.info();
+
+    // 结构体更新语法跟赋值语句 = 非常相像，因此在上面代码中，user1 的部分字段所有权被转移到 user2 中
+    // username 字段发生了所有权转移，作为结果，user1.username 无法再被使用。但 user1.age 可以使用
+    // age 赋值给 user2 时仅仅发生了拷贝，而不是所有权转移
+    // println!("user1.username {}", user1.username);
+    println!("user1.age {}", user1.age);
 }
 
 // Rust 提供了 Debug 模式的调试打印方法, # 表示引入调试(Debug)方法
@@ -65,6 +89,7 @@ fn struct2() {
     println!("Student Name: {} Class: {}", stu1.name, stu1.class);
     // :? 这个符号告诉 println! 将使用 Debug 的输出格式
     println!("Student: {:?}", stu1);
+    // 希望能够有更好的输出表现，此时可以使用 {:#?} 来替代 {:?}
     // 另一个符号也表示 Debug 模式输出 :#?
     println!("Student: {:#?}", stu1);
     if stu1.pass() {
@@ -141,8 +166,47 @@ fn struct3() {
     );
 }
 
+// 单元结构体(Unit-like Struct)
+// 如果你定义一个类型，但是不关心该类型的内容, 只关心它的行为时，就可以使用 单元结构体
+struct AlwaysEqual;
+
+trait SomeTrait {
+    fn hello(&self);
+}
+
+// 我们不关心 AlwaysEqual 的字段数据，只关心它的行为，因此将它声明为单元结构体，然后再为它实现某个特征
+impl SomeTrait for AlwaysEqual {
+    fn hello(&self) {
+        println!("hello");
+    }
+}
+
+fn unit_struct() {
+    let subject = AlwaysEqual;
+    subject.hello();
+}
+
+// 还有一个简单的输出 debug 信息的方法，那就是使用 dbg! 宏，它会拿走表达式的所有权，
+// 然后打印出相应的文件名、行号等 debug 信息，当然还有我们需要的表达式的求值结果。
+// 除此之外，它最终还会把表达式值的所有权返回！
+// dbg! 输出到标准错误输出 stderr，而 println! 输出到标准输出 stdout
+fn struct4() {
+    let a = 2;
+    let u = Student {
+        name: "name".to_string(),
+        class: "class".to_string(),
+        score: dbg!(2 * a),
+        pass: false,
+    };
+
+    dbg!(&u);
+    println!("u {:#?}", u);
+}
+
 fn main() {
     // struct1();
     // struct2();
     // struct3();
+    // unit_struct();
+    struct4();
 }

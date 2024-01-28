@@ -44,6 +44,15 @@ async fn get_user(Path(user_id): Path<String>, state: Arc<AppState>) -> impl Int
     )
 }
 
+// 注意添加应用状态不是强制的 - 仅在想要使用它时
+async fn hello_front() -> &'static str {
+    "Hello"
+}
+
+async fn do_something(State(state): State<AppState>) -> impl IntoResponse {
+    // handle
+}
+
 #[tokio::main]
 async fn main() {
     // 处理器共享状态（Sharing state with handlers）

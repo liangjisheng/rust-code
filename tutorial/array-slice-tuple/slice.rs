@@ -12,6 +12,25 @@ fn slice1() {
 
     // fetches characters at 4,5,6,7, and 8 indexes
     println!("{}", c1);
+
+    // 字符串s拥有三个元素：指向heap数据的指针、字符串长度、字符串容量
+    // 字符串切片world拥有两个元素：指向heap数据起始位置的指针、切片长度
+    let s = String::from("hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    println!("{}, {}", hello, world);
+
+    let s = String::from("hello");
+    let slice = &s[0..2];
+    let slice = &s[..2];
+
+    // 包含最后一个字节
+    let len = s.len();
+    let slice = &s[4..len];
+    let slice = &s[4..];
+    //截取完整的 String 切片
+    let slice = &s[0..len];
+    let slice = &s[..];
 }
 
 // 切片还可以作为函数的参数。使用切片可以把数组、向量、字符串中的连续子集通过引用的方式传递给函数
@@ -47,8 +66,30 @@ fn slice3() {
     println!("{:?}", data);
 }
 
-fn main() {
-    // slice1();
-    // slice2();
-    slice3();
+// 获取字符串中第一个单词
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
 }
+
+fn main() {
+    slice1();
+    // slice2();
+    // slice3();
+}
+
+// 建议传给函数的字符串引用参数以切片的形式给出，即&str，这样可以保证函数
+// 既可以接收到&String类型的参数，也可以接收&str类型的参数。
+// 注意：&String和&str是两个不同的类型：
+// &String 是字符串值的引用
+// &str 是字符串值的切片
+
+// 对于一个以 &str 为入参的函数：fn first_word(s: &str) -> &str { /*...*/ }
+// 当入参是一个 &String 类型时，会创建一个完整的切片来调用该函数，即 &str_name[..]
+// 当入参是一个字符串切片(&str)时，会直接调用该函数。
+// 定义函数时使用字符串切片来代替字符串引用，可以是API更加通用，且不会损失任何功能

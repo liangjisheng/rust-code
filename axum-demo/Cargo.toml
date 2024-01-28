@@ -10,5 +10,9 @@ members = [
     "middleware",
     "tower-handler",
     "share-state",
+    "testing-websockets",
+    "anyhow-error-response",
+    "form",
+    "axum-tonic-server",
 ]
 resolver = "2"

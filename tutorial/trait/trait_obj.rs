@@ -62,7 +62,7 @@ fn get_total_area(shapes: Vec<Box<dyn Shape>>) -> f64 {
     shapes.into_iter().map(|s| s.area()).sum()
 }
 
-fn main() {
+fn t1() {
     let circle = Circle::new(5.0); // 实现了Shape trait 的结构体
     let shape: &dyn Shape = &circle; // &circle 是 trait 对象，用&dyn Shape申明
     println!("shape => {}", shape.area());
@@ -89,7 +89,6 @@ fn main() {
 
 // 只有对象安全（object-safe）的 trait 可以实现为特征对象。这里有一些复杂的规则来实现
 // trait 的对象安全，但在实践中，如果一个 trait 中定义的都符合以下规则，则该 trait 是对象安全的：
-
 // 方法的返回类型不能是Self
 // 方法没有任何泛型参数
 // Trait 不能Sized约束
@@ -103,3 +102,59 @@ fn main() {
 // 通过 trait 对象，我们可以允许函数在运行时动态地返回不同的类型。trait 对象的结构体
 // 大小是未知的，所以必须要通过指针来引用它们。具体类型与 trait 对象在字面上的区别在于，
 // trait 对象必须要用 dyn 关键字来修饰前缀
+
+trait Draw {
+    fn draw(&self) -> String;
+}
+
+impl Draw for u8 {
+    fn draw(&self) -> String {
+        format!("u8: {}", *self)
+    }
+}
+
+impl Draw for f64 {
+    fn draw(&self) -> String {
+        format!("f64: {}", *self)
+    }
+}
+
+// 若 T 实现了 Draw 特征， 则调用该函数时传入的 Box<T> 可以被隐式转换成函数参数签名中的 Box<dyn Draw>
+// dyn 关键字只用在特征对象的类型声明上，在创建时无需使用 dyn
+fn draw1(x: Box<dyn Draw>) {
+    // 由于实现了 Deref 特征，Box 智能指针会自动解引用为它所包裹的值，然后调用该值对应的类型上定义的 `draw` 方法
+    let r1 = x.draw();
+    println!("{}", r1);
+}
+
+fn draw2(x: &dyn Draw) {
+    let r1 = x.draw();
+    println!("{}", r1);
+}
+
+fn t2() {
+    let x = 1.1f64;
+    // do_something(&x);
+    let y = 8u8;
+
+    // x 和 y 的类型 T 都实现了 `Draw` 特征，因为 Box<T> 可以在函数调用时隐式地被转换为特征对象 Box<dyn Draw>
+    // 基于 x 的值创建一个 Box<f64> 类型的智能指针，指针指向的数据被放置在了堆上
+    draw1(Box::new(x));
+    // 基于 y 的值创建一个 Box<u8> 类型的智能指针
+    draw1(Box::new(y));
+    draw2(&x);
+    draw2(&y);
+}
+
+// 注意 dyn 不能单独作为特征对象的定义，例如下面的代码编译器会报错，原因是特征对象可以是任
+// 意实现了某个特征的类型，编译器在编译期不知道该类型的大小，不同的类型大小是不同的。
+// 而 &dyn 和 Box<dyn> 在编译期都是已知大小，所以可以用作特征对象的定义。
+// 编译报错
+// fn draw3(x: dyn Draw) {
+//     x.draw();
+// }
+
+fn main() {
+    // t1();
+    t2();
+}

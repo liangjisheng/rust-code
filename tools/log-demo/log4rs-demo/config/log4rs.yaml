@@ -1,0 +1,28 @@
+refresh_rate: 10 seconds
+
+appenders:
+  stdout:
+    kind: console
+    encoder:
+      pattern: "{d(%+)(utc)} [{f}:{L}] {h({l})} {M}:{m}{n}"
+    filters:
+      - kind: threshold
+        level: info
+  file:
+    kind: file
+    path: "log/log.log"
+    encoder:
+      pattern: "{d(%+)(utc)} [{f}:{L}] {h({l})} {M}:{m}{n}"
+
+root:
+  level: info
+  appenders:
+    - stdout
+    - file
+
+#loggers:
+#  multi_logger_config:
+#    level: info
+#    appenders:
+#      - file
+#    additive: true

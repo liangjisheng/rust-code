@@ -11,7 +11,8 @@ pub trait Summary {
 }
 
 // 实际上self是self: Self的简写，&self是self: &Self的简写，&mut self是self &mut Self的简写。
-// Self代表的是当前实现了 trait 的类型，例如有一个类型 Foo 实现了 Summary trait，则实现方法时中的 Self 就是Foo
+// Self代表的是当前实现了 trait 的类型，例如有一个类型 Foo 实现了 Summary trait，则实现方法时中
+// 的 Self 就是Foo
 
 pub struct Tweet {
     pub username: String,
@@ -75,6 +76,7 @@ fn notify_all(summaries: Vec<impl Summary>) {
 // 对于比较复杂的使用场景，特征约束可以让我们拥有更大的灵活性和语法表现能力
 // 例如一个函数接受两个 impl Summary 的参数
 // pub fn notify(item1: &impl Summary, item2: &impl Summary) {} // trait 参数
+
 // 泛型 T 约束：说明 item1 和 item2 必须拥有同样的类型，同时说明 T 必须实现 Summary trait
 // pub fn notify<T: Summary>(item1: &T, item2: &T) {}
 
@@ -157,23 +159,41 @@ fn t4() {
 }
 
 // 可以通过 impl Trait 来说明一个函数返回了一个类型，该类型实现了某个 trait
-fn returns_summarizable() -> impl Summary {
-    Tweet {
-        username: String::from("haha"),
-        content: String::from("the content"),
-        reply: false,
-        retweet: false,
-    }
+// 编译器报错，原因是 impl Trait 的返回值类型并不支持多种不同的类型返回
+fn returns_summarizable(switch: bool) -> impl Summary {
+    // if switch {
+    //     Tweet {
+    //         username: String::from("haha"),
+    //         content: String::from("the content"),
+    //         reply: false,
+    //         retweet: false,
+    //     }
+    // } else {
+    //     Post {
+    //         title: "".to_string(),
+    //         author: "".to_string(),
+    //         content: "".to_string(),
+    //     }
+    // }
 }
 
 // 如果想要实现返回不同的类型，需要使用trait 对象
-// fn returns_summarizable(switch: bool) -> Box<dyn Summary> {
-//     if switch {
-//         Box::new(Tweet { ... }) // trait 对象
-//     } else {
-//         Box::new(Post { ... })  // trait 对象
-//     }
-// }
+fn returns_summarizable1(switch: bool) -> Box<dyn Summary> {
+    if switch {
+        Box::new(Tweet {
+            username: "".to_string(),
+            content: "".to_string(),
+            reply: false,
+            retweet: false,
+        }) // trait 对象
+    } else {
+        Box::new(Post {
+            title: "".to_string(),
+            author: "".to_string(),
+            content: "".to_string(),
+        }) // trait 对象
+    }
+}
 
 fn main() {
     // t1();

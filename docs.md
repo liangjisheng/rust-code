@@ -1,5 +1,22 @@
 # rust
 
+目前国内 Rust 工具链镜像源，可以将其存储到系统环境的个性化设置文件中，如 .bashrc 或 .profile
+rustup 设置国内镜像源
+
+```shell
+#中国科学技术大学源
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
+#上海交通大学源
+export RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
+
+#清华大学源
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+```
+
 install (需要科学上网)
 
 ```shell
@@ -11,6 +28,49 @@ rustup default stable
 rustup update
 rustup self uninstall
 ```
+
+cargo 设置国内镜像源
+覆盖默认的镜像地址, 不需要修改 Cargo.toml 文件，它是直接使用新注册服务来替代默认的 crates.io
+在 $HOME/.cargo/config.toml 或者 $HOME/.cargo/config 中添加以下内容：
+
+```toml
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+```
+
+```toml
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+# 指定镜像
+replace-with = '镜像源名' # 如：tuna、sjtu、ustc，或者 rustcc
+
+# 注：以下源配置一个即可，无需全部
+
+# 中国科学技术大学
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+# >>> 或者 <<<
+#registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+
+# 上海交通大学
+[source.sjtu]
+registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index/"
+
+# 清华大学
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+# rustcc社区
+[source.rustcc]
+registry = "https://code.aliyun.com/rustcc/crates.io-index.git"
+```
+
+这样创建一个新的镜像源 [source.ustc]，然后将默认的 crates-io 替换成新的镜像源: replace-with = 'ustc'
+只要这样配置后，以往需要去 crates.io 下载的包，会全部从科大的镜像地址下载
 
 ```shell
 #编译
@@ -56,14 +116,14 @@ cargo add tokio --features full
 # 为了分隔这两种参数，需要先列出传递给 cargo build 的参数，接着是分隔符 --，
 # 再之后是传递给二进制文件的参数。
 cargo build -- sample.txt
-```
 
-install
+#快速的检查一下代码能否编译通过
+cargo check
 
-cargo install 命令用于在本地安装和使用二进制 crate, 所有来自 cargo install 的二进制文件都安装到 Rust 安装根目录的 bin 文件夹中
-
-```shell
-cargo install ripgrep
+#cargo install 命令用于在本地安装和使用二进制 crate, 所有来自 cargo install 
+#的二进制文件都安装到 Rust 安装根目录的 bin 文件夹中
+#如果需要一次安装多个，通过空格分隔即可
+cargo install ripgrep mdbook
 ```
 
 test
@@ -110,3 +170,22 @@ Cargo 的设计使得开发者可以通过新的子命令来对 Cargo 进行扩�
 来像 Cargo 子命令一样运行它。像这样的自定义命令也可以运行 cargo --list 来展示出来。
 能够通过 cargo install 向 Cargo 安装扩展并可以如内建 Cargo 工具那样运行它们是 
 Cargo 设计上的一个非常方便的优点！
+
+Cargo.toml 是 cargo 特有的项目数据描述文件。它存储了项目的所有元配置信息，如果 Rust 
+开发者希望 Rust 项目能够按照期望的方式进行构建、测试和运行，那么，必须按照合理的方式构建 Cargo.toml。
+
+Cargo.lock 文件是 cargo 工具根据同一项目的 toml 文件生成的项目依赖详细清单，因此我们
+一般不用修改它，只需要对着 Cargo.toml 文件撸就行了。
+
+什么情况下该把 Cargo.lock 上传到 git 仓库里？很简单，当你的项目是一个可运行的程序时，
+就上传 Cargo.lock，如果是一个依赖库项目，那么请把它添加到 .gitignore 中。
+
+3种外部依赖库的写法
+
+```toml
+[dependencies]
+rand = "0.3"
+hammer = { version = "0.5.0"}
+color = { git = "https://github.com/bjz/color-rs" }
+geometry = { path = "crates/geometry" }
+```

@@ -2,6 +2,10 @@
 
 // 从循环中获得返回值，我们可以利用这一点来获取循环退出的原因，
 // 从而可以分析循环操作是否完成或成功，当然还有其它的用途
+
+// break 可以单独使用，也可以带一个返回值，有些类似 return
+// loop 是一个表达式，因此可以返回一个值
+
 fn loop1() {
     let mut counter = 0;
     let result = loop {
@@ -38,51 +42,7 @@ fn loop2() {
     println!("End count = {count}");
 }
 
-fn while1() {
-    // while
-    let mut counter = 3;
-    while counter != 0 {
-        println!("counter: {}", counter);
-        counter -= 1;
-    }
-    println!("end");
-}
-
-fn for1() {
-    let arr = ['a', 'b', 'c'];
-    for element in arr.iter() {
-        println!("element: {}", element);
-    }
-    println!("end");
-
-    for element in arr {
-        println!("the value is: {element}");
-    }
-    println!("end");
-
-    for number in 1..4 {
-        println!("number：{}", number);
-    }
-    //反转范围
-    for number in (1..4).rev() {
-        println!("number：{}", number);
-    }
-    println!("end");
-}
-
-fn for2() {
-    for i in 1..11 {
-        if i == 5 {
-            continue;
-        }
-        print!("{} ", i);
-    }
-}
-
 fn main() {
-    // loop1();
-    // loop2();
-    // while1();
-    // for1();
-    for2();
+    loop1();
+    loop2();
 }
