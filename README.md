@@ -4,7 +4,7 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust course](https://course.rs/basic/collections/intro.html)
+[rust course](https://course.rs/advance/lifetime/advance.html)
 [Rust 实践指南](https://books.niqin.com/read/rust-guide/zh-cn/5-algorithms/5.1-randomness/5.1.1-rand.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 

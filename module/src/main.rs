@@ -20,9 +20,12 @@
 
 // src_a.rs和src_b.rs相当于分别是a.rs和c.rs与b.rs的代理
 
+// 下面的代码告诉 rust 从与 src_a 同名的 rs 文件中加载模块
 pub mod src_a;
-pub mod src_b;
+// 引用模块 src_a 下面的所有内容
 pub use self::src_a::*;
+
+pub mod src_b;
 pub use crate::src_b::*;
 
 // 内部建立一个 mod.rs，mod.rs 也是一种桥。可以让外部更方面地访问到 d.rs
@@ -34,6 +37,7 @@ pub mod src_d;
 // pub use self::src_d::d;
 pub use src_d::d;
 
+// 从 e.rs, f.rs 中加载模块内容
 mod e;
 mod f;
 

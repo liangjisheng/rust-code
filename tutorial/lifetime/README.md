@@ -1,5 +1,7 @@
 # lifetime
 
+生命周期，简而言之就是引用的有效作用域。在大多数时候，我们无需手动的声明生命周期，因为编译器可以自动进行推导
+
 [lifetime](https://kaisery.github.io/trpl-zh-cn/ch10-03-lifetime-syntax.html)
 [lifetime](https://zhuanlan.zhihu.com/p/93193353)
 [lifetime](https://zhuanlan.zhihu.com/p/93846179)

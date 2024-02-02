@@ -102,7 +102,7 @@ struct ABC2<'a, 'b> {
 }
 
 fn main() {
-    let a = String::from("a");
+    let a = String::from("alice");
     let c;
     {
         let b = String::from("bob");
@@ -114,5 +114,5 @@ fn main() {
     } // b 在这里就死了
 
     // 这行会报错,因为最小生命周期是 b
-    // println!("b: {}", b);
+    // println!("c: {}", c);
 }

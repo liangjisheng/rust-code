@@ -57,6 +57,7 @@ fn d1() {
     // println!("What does Point2D look like in binary: {:b}?", point);
 }
 
+// 在 Rust 中，无法直接为外部类型实现外部特征，但是可以使用 newtype 解决此问题
 // 定义一个包含单个 `Vec` 的结构体 `List`。
 struct List(Vec<i32>);
 
