@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "blocking",
+    "demo",
+    "tor-socks",
+]
+resolver = "2"

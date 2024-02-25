@@ -6,6 +6,7 @@
 // 一般来说，我们自己定义的struct和trait都是没有copy属性的，所以这种就只能用RefCell
 
 // Cell 与RefCell的区别是，Cell是整个值做替换，而RefCell是引用着值，不需要将整个value做替换
+// Cell 和 RefCell 在功能上没有区别，区别在于 Cell<T> 适用于 T 实现 Copy 的情况
 
 // 内部可变性, 现在虽然是多个共享引用，但是当你需要改变的时候你需要通过
 // 共享的引用获取到可变的引用，这时候Rust会在运行期进行检查
@@ -109,3 +110,19 @@ fn main() {
 
 // 因为 Cell 和 RefCell 两种类型都未实现 Sync trait，所以这两种包装类型只能用于单线程中
 // 不能跨线程操作， 如果需要跨线程操作，就需要用到 Mutex 和 RwLock 了
+
+fn is_even(i: i32) -> bool {
+    i % 2 == 0
+}
+
+fn retain_even(nums: &mut Vec<i32>) {
+    let slice: &[Cell<i32>] = Cell::from_mut(&mut nums[..]).as_slice_of_cells();
+
+    let mut i = 0;
+    for num in slice.iter().filter(|num| is_even(num.get())) {
+        slice[i].set(num.get());
+        i += 1;
+    }
+
+    nums.truncate(i);
+}

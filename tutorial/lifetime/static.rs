@@ -2,6 +2,7 @@
 // 字符串变量全部具有 'static 的生命周期
 // 实在遇到解决不了的生命周期标注问题，可以尝试 T: 'static，有时候它会给你奇迹
 
+// static 到底针对谁？
 // 到底是 &'static 这个引用还是该引用指向的数据活得跟程序一样久呢？
 // 答案是引用指向的数据，而引用本身是要遵循其作用域范围的
 
@@ -36,6 +37,10 @@ fn get_str_at_location(pointer: usize, length: usize) -> &'static str {
     // 使用裸指针需要 unsafe 语句块
     unsafe { from_utf8_unchecked(from_raw_parts(pointer as *const u8, length)) }
 }
+
+// 上面代码有两点值得注意：
+// &'static 的引用确实可以和程序活得一样久，因为我们通过 get_str_at_location 函数直接取到了对应的字符串
+// 持有 &'static 引用的变量，它的生命周期受到作用域的限制，大家务必不要搞混了
 
 use std::fmt::Debug;
 
@@ -112,4 +117,14 @@ fn main() {
     println!();
 
     st1();
+
+    {
+        let static_string = "I'm in read-only memory";
+        println!("static_string: {}", static_string);
+
+        // 当 `static_string` 超出作用域时，该引用不能再被使用，但是数据依然会存在于 binary 所占用的内存中
+    }
+    println!("static_string reference remains alive: {}", static_string);
+    // 以上代码不出所料会报错，原因在于虽然字符串字面量 "I'm in read-only memory" 的生命周期是
+    // 'static，但是持有它的引用并不是，它的作用域在内部花括号 } 处就结束了。
 }

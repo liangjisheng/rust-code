@@ -73,8 +73,56 @@ fn b3() {
     MyBox::new("Hello");
 }
 
+// 避免栈上数据的拷贝
+fn b4() {
+    // 在栈上创建一个长度为1000的数组
+    let arr = [0; 1000];
+    // 将arr所有权转移arr1，由于 `arr` 分配在栈上，因此这里实际上是直接重新深拷贝了一份数据
+    let arr1 = arr;
+
+    // arr 和 arr1 都拥有各自的栈上数组，因此不会报错
+    println!("{:?}", arr.len());
+    println!("{:?}", arr1.len());
+
+    // 在堆上创建一个长度为1000的数组，然后使用一个智能指针指向它
+    let arr = Box::new([0; 1000]);
+    // 将堆上数组的所有权转移给 arr1，由于数据在堆上，因此仅仅拷贝了智能指针的结构体，底层数据并没有被拷贝
+    // 所有权顺利转移给 arr1，arr 不再拥有所有权
+    let arr1 = arr;
+    println!("{:?}", arr1.len());
+    // 由于 arr 不再拥有底层数组的所有权，因此下面代码将报错
+    // println!("{:?}", arr.len());
+}
+
+// Box 中还提供了一个非常有用的关联函数：Box::leak，它可以消费掉 Box 并且强制目标值从内存中泄漏
+// 而通过 Box::leak 我们不仅返回了一个 &str 字符串切片，它还是 'static 生命周期的！
+fn gen_static_str() -> &'static str {
+    let mut s = String::new();
+    s.push_str("hello, world");
+
+    let r = s.into_boxed_str();
+    Box::leak(r)
+}
+
+fn b5() {
+    let s = gen_static_str();
+    println!("{}", s);
+
+    let x = Box::new(41);
+    let static_ref: &'static mut usize = Box::leak(x);
+    *static_ref += 1;
+    assert_eq!(*static_ref, 42);
+
+    let x = vec![1, 2, 3].into_boxed_slice();
+    let static_ref = Box::leak(x);
+    static_ref[0] = 4;
+    assert_eq!(*static_ref, [4, 2, 3]);
+}
+
 fn main() {
     // b1();
     // b2();
-    b3();
+    // b3();
+    // b4();
+    b5();
 }

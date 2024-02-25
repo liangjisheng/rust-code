@@ -4,17 +4,12 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust course](https://course.rs/advance/lifetime/advance.html)
+[rust course](https://course.rs/advance/circle-self-ref/circle-reference.html)
 [Rust 实践指南](https://books.niqin.com/read/rust-guide/zh-cn/5-algorithms/5.1-randomness/5.1.1-rand.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 
-[http client](https://github.com/seanmonstar/reqwest)
-[http client](https://github.com/http-rs/surf)
-[orm](https://juejin.cn/post/7255513860264919098)
-[num](https://github.com/rust-num/num)
 [rustls](https://crates.io/crates/rustls)
-[fastwebsockets](https://mp.weixin.qq.com/s/9aQz5aTyPW4K7-tzTtTLVg)
-[fastwebsockets](https://github.com/denoland/fastwebsockets)
+[orm](https://juejin.cn/post/7255513860264919098)
 [diesel](https://diesel.rs/)
 [diesel](https://github.com/diesel-rs/diesel)
 [sled](https://github.com/spacejam/sled)

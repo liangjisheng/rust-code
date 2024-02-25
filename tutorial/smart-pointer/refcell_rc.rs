@@ -13,7 +13,7 @@ use crate::List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
 
-fn main() {
+fn r1() {
     let value = Rc::new(RefCell::new(5));
 
     let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
@@ -28,6 +28,11 @@ fn main() {
     println!("c after = {:?}", c);
 }
 
+fn main() {
+    // r1();
+    r2();
+}
+
 // 这里创建了一个 Rc<RefCell<i32>> 实例并储存在变量 value 中以便之后直接访问。
 // 接着在 a 中用包含 value 的 Cons 成员创建了一个 List。
 // 需要克隆 value 以便 a 和 value 都能拥有其内部值 5 的所有权，
@@ -40,3 +45,17 @@ fn main() {
 // 不过可以使用 RefCell<T> 中提供内部可变性的方法来在需要时修改数据。
 // RefCell<T> 的运行时借用规则检查也确实保护我们免于出现数据竞争
 // 有时为了数据结构的灵活性而付出一些性能是值得的
+
+// 在 Rust 中，一个常见的组合就是 Rc 和 RefCell 在一起使用，前者可以实现一个数据拥有
+// 多个所有者，后者可以实现数据的可变性：
+
+fn r2() {
+    let s = Rc::new(RefCell::new("我很善变，还拥有多个主人".to_string()));
+
+    let s1 = s.clone();
+    let s2 = s.clone();
+    // let mut s2 = s.borrow_mut();
+    s2.borrow_mut().push_str(", oh yeah!");
+
+    println!("{:?}\n{:?}\n{:?}", s, s1, s2);
+}
