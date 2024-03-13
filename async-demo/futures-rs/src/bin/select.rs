@@ -8,57 +8,10 @@ use futures::future::{self, BoxFuture, FusedFuture, FutureExt, TryFutureExt};
 use futures::future::{join, join_all, try_join, try_join_all};
 use futures::future::{select, select_all, try_select, Either};
 use futures::future::{select_ok, try_join3};
-use futures::stream::{self, FuturesUnordered, StreamExt};
-use futures::{pin_mut, select};
+use futures::stream::{self, FusedStream, FuturesUnordered, StreamExt};
+use futures::{pin_mut, select, Stream};
 use std::ops::Index;
 use std::time::{self, Duration};
-
-async fn f_join() {
-    // join通过两个Future参数，构造一个新的 Future
-    // 这个Future等待输入的两个Future完成，返回值为包含两个结果的元组
-    // try_join为join的TryFuture版本，出现错误将返回第一个遇到的错误
-    async fn foo(i: u32) -> u32 {
-        i
-    }
-    let result = join(foo(1), foo(2)).await;
-    assert_eq!(result, (1, 2));
-
-    async fn try_foo(i: u32) -> Result<u32, u32> {
-        if i > 10 {
-            Err(i)
-        } else {
-            Ok(i)
-        }
-    }
-    let result = try_join(try_foo(1), try_foo(2)).await;
-    assert_eq!(result, Ok((1, 2)));
-    let result = try_join(try_foo(1), try_foo(22)).await;
-    assert_eq!(result, Err(22));
-}
-
-async fn f_join_all() {
-    // join_all接受多个Future，构造一个新的Future，这个Future等待输入的所以Future完成，返回值为结果数组
-    // try_join_all为join_all的TryFuture版本，出现错误将返回第一个遇到的错误
-    async fn foo(i: u32) -> u32 {
-        i
-    }
-
-    let futures = vec![foo(1), foo(2), foo(3)];
-    assert_eq!(join_all(futures).await, [1, 2, 3]);
-
-    async fn try_foo(i: u32) -> Result<u32, u32> {
-        if i > 10 {
-            Err(i)
-        } else {
-            Ok(i)
-        }
-    }
-
-    let futures = vec![try_foo(1), try_foo(2), try_foo(3)];
-    assert_eq!(try_join_all(futures).await, Ok(vec![1, 2, 3]));
-    let futures = vec![try_foo(1), try_foo(22), try_foo(33)];
-    assert_eq!(try_join_all(futures).await, Err(22));
-}
 
 async fn f_select() {
     // select 返回的新Future将等待两个Future中的任何一个完成，Future需要是Unpin
@@ -304,26 +257,6 @@ async fn f_select2() {
         };
         println!("result: {}", r);
     }
-}
-
-async fn add_two_streams(
-    mut s1: impl Stream<Item = u8> + FusedStream + Unpin,
-    mut s2: impl Stream<Item = u8> + FusedStream + Unpin,
-) -> u8 {
-    let mut total = 0;
-
-    loop {
-        let item = select! {
-            x = s1.next() => x,
-            x = s2.next() => x,
-            complete => break,
-        };
-        if let Some(next_num) = item {
-            total += next_num;
-        }
-    }
-
-    total
 }
 
 fn main() {

@@ -1,29 +1,3 @@
-// 解引用裸指针包括两种类型：
-// 不可变解引用裸指针：*const T；
-// 可变解引用裸指针：*mut T；
-// 注意，上面的*是类型名的一部分，而不是解引用运算符
-
-// 解引用裸指针与引用和智能指针的区别在于：
-// 允许忽略借用规则，可以同时拥有不可变和可变的指针，或多个指向相同位置的可变指针；
-// 不保证指向有效的内存；
-// 允许为null；
-// 不能实现任何自动清理功能
-
-// 可以认为解引用裸指针就是C语言中最基础的指针
-// 创建裸指针并不需要在unsafe中声明(因为没有任何危险)，但是使用的时候必须在unsafe块中使用
-
-fn u1() {
-    let mut num = 5;
-
-    let r1 = &num as *const i32;
-    let r2 = &mut num as *mut i32;
-
-    unsafe {
-        println!("r1 is: {}", *r1);
-        println!("r2 is: {}", *r2);
-    }
-}
-
 // 在使用Unsafe Rust的代码时，需要在unsafe代码块中执行，当一个方法为不安全的时候，
 // 需要将其声明为unsafe，同时调用它时也需要在unsafe中执行
 // unsafe函数和方法与常规函数方法十分类似，只是其开头有一个额外的 unsafe
@@ -72,54 +46,10 @@ fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
     }
 }
 
-// 创建外部函数接口(Foreign Function Interface， FFI)，
-// 需要在extern块内声明，然后使用时必须在unsafe块中使用。
-// 任何extern块中的方法都是不安全的，因为无法保证外部方法一定安全
-extern "C" {
-    fn abs(input: i32) -> i32;
-}
+// 之所以会有 unsafe 的特征，是因为该特征至少有一个方法包含有编译器无法验证的内容
 
-fn u3() {
-    unsafe {
-        println!("Absolute value of -3 according to C: {}", abs(-3));
-    }
-}
-
-// 如果是其他语言调用Rust编写的函数：需要在fn关键字前添加extern关键字，并需要添加
-// #[no_mangle]注解来告诉 Rust 编译器不要 改变 此函数的名称
-// (因为一般Rust编译器会改变函数名，使其带上更多信息)
-#[no_mangle]
-pub extern "C" fn call_from_c() {
-    println!("Just called a Rust function from C!");
-}
-
-// 静态全局变量(不可变)
-// 通常静态变量的名称采用 SCREAMING_SNAKE_CASE 写法。静态变量只能储存拥有 'static 生命周期的引用，
-// 这意味着 Rust 编译器可以自己计算出其生命周期而无需显式标注。访问不可变静态变量是安全的。
-static HELLO_WORLD: &str = "Hello, world!";
-
-// 默认情况下，Rust中的全局变量(静态变量)是不能被修改的，因为在并发环境下修改全局变量会出现数据竞争
-// 静态变量只能储存拥有 'static 生命周期的引用
-// 常量与不可变静态变量可能看起来很类似，区别是
-// 静态变量中的值有一个固定的内存地址。使用这个值总是会访问相同的地址。另一方面，常量则允许在任何被用到的时候复制其数据。
-// 常量与静态变量的另一个区别在于静态变量可以是可变的。访问和修改可变静态变量都是 Unsafe 的
-// 拥有可以全局访问的可变数据，难以保证不存在数据竞争，这就是为何 Rust 认为可变静态变量是不安全的。
-static mut COUNTER: u32 = 0;
-
-fn add_to_count(inc: u32) {
-    unsafe {
-        COUNTER += inc;
-    }
-}
-
-fn u4() {
-    add_to_count(3);
-    unsafe {
-        println!("COUNTER: {}", COUNTER);
-    }
-}
-
-// 可以在 trait 之前增加 unsafe 关键字将 trait 声明为 unsafe，同时 trait 的实现也必须标记为 unsafe
+// 可以在 trait 之前增加 unsafe 关键字将 trait 声明为 unsafe，
+// 同时 trait 的实现也必须标记为 unsafe
 unsafe trait Foo {
     // methods go here
 }
@@ -128,8 +58,43 @@ unsafe impl Foo for i32 {
     // method implementations go here
 }
 
+// 再回到刚提到的 Send 特征，若我们的类型中的所有字段都实现了 Send 特征，那该类型也
+// 会自动实现 Send。但是如果我们想要为某个类型手动实现 Send ，例如为裸指针，那么就
+// 必须使用 unsafe
+
+// 总之，Send 特征标记为 unsafe 是因为 Rust 无法验证我们的类型是否能在线程间安全的
+// 传递，因此就需要通过 unsafe 来告诉编译器，它无需操心，剩下的交给我们自己来处理。
+
+// 截止目前，我们还没有介绍过 union ，原因很简单，它主要用于跟 C 代码进行交互。
+// 访问 union 的字段是不安全的，因为 Rust 无法保证当前存储在 union 实例中的数据类型。
+
+#[repr(C)]
+union MyUnion {
+    f1: u32,
+    f2: f32,
+}
+
+// 上从可以看出，union 的使用方式跟结构体确实很相似，但是前者的所有字段都共享同一个存储空间
+// 意味着往 union 的某个字段写入值，会导致其它字段的值会被覆盖。
+
 fn main() {
     // u1();
     // u2();
-    u4();
 }
+
+// 由于 unsafe 和 FFI 在 Rust 的使用场景中是相当常见的(例如相对于 Go 的 unsafe 来说)，
+// 因此社区已经开发出了相当一部分实用的工具，可以改善相应的开发体验。
+
+// https://github.com/rust-lang/rust-bindgen
+// https://github.com/eqrion/cbindgen/
+// 其中 rust-bindgen 用于在 Rust 中访问 C 代码，而 cbindgen则反之
+
+// 如果需要跟 C++ 代码交互，非常推荐使用 cxx，它提供了双向的调用，最大的优点就是安全
+// 是的，你无需通过 unsafe 来使用它！
+// https://github.com/dtolnay/cxx
+
+// miri 可以生成 Rust 的中间层表示 MIR，对于编译器来说，我们的 Rust 代码首先会被编译为
+// MIR ，然后再提交给 LLVM 进行处理。
+// 可以通过 rustup component add miri 来安装它，并通过 cargo miri 来使用，同时还
+// 可以使用 cargo miri test 来运行测试代码。
+// https://github.com/rust-lang/miri

@@ -148,6 +148,16 @@ cargo test one_hundred
 cargo test --test integration_test
 ```
 
+## bench
+
+[tutorial](https://course.rs/test/benchmark.html)  
+
+执行 benches 目录下的文件
+
+```shell
+cargo bench
+```
+
 publish
 
 ```shell
@@ -188,4 +198,17 @@ rand = "0.3"
 hammer = { version = "0.5.0"}
 color = { git = "https://github.com/bjz/color-rs" }
 geometry = { path = "crates/geometry" }
+```
+
+# 切换 rust 版本
+
+```shell
+#安装 nightly 版本
+rustup install nightly
+#查看已安装版本
+rustup toolchain list
+#进入某个项目的根目录,将该项目使用的 rust 设置为 nightly
+rustup override set nightly
+#切换回 stable 版本
+rustup override set stable
 ```

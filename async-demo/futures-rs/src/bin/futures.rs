@@ -1,4 +1,4 @@
-#![feature(async_closure)]
+// #![feature(async_closure)]
 
 // async 关键字可以用于创建如下类型的 Future：
 // 定义函数：async fn
@@ -70,11 +70,11 @@ async fn async_main() {
 // await! 只能用于异步函数，异步闭包或者异步块内部，否则将导致编译错误
 async fn af1() {
     // 异步闭包返回类型是 impl Future<Output = T>
-    let closure = async || {
-        async_std::task::sleep(time::Duration::from_millis(200)).await;
-        println!("Hello from async closure.");
-    };
-    let future = closure();
+    // let closure = async || {
+    //     async_std::task::sleep(time::Duration::from_millis(200)).await;
+    //     println!("Hello from async closure.");
+    // };
+    // let future = closure();
 
     // 通过异步块可以便捷地创建一个 Future
     let future1 = async {
@@ -84,7 +84,7 @@ async fn af1() {
     };
 
     // 加上 await 后, future, future1 变成线性执行
-    future.await;
+    // future.await;
     // let n = await!(future);
     println!("n {}", future1.await);
 

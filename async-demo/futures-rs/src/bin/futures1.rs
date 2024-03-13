@@ -1,4 +1,4 @@
-#![feature(async_closure)]
+// #![feature(async_closure)]
 
 // https://blog.csdn.net/wowotuo/article/details/91145819
 
@@ -93,19 +93,19 @@ async fn compute_04() {
     println!("=>04 it is over!");
 }
 
-fn compute_05(value: i32) -> impl Future<Output = i32> {
-    let closure = async move |v: i32| {
-        compute_03().await;
-        v + 1
-    };
-    closure(value)
-}
+// fn compute_05(value: i32) -> impl Future<Output = i32> {
+// let closure = async move |v: i32| {
+//     compute_03().await;
+//     v + 1
+// };
+// closure(value)
+// }
 
 fn main() {
     // block_on(hello());
 
     block_on(compute_02());
     block_on(compute_03());
-    let val = block_on(compute_05(6));
-    println!("val :{:?}", val); // 7
+    // let val = block_on(compute_05(6));
+    // println!("val :{:?}", val); // 7
 }

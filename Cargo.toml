@@ -38,7 +38,7 @@ edition = "2021"
 default-run = "hello"
 
 [dependencies]
-color = { git = "https://github.com/bjz/color-rs" }
+#color = { git = "https://github.com/bjz/color-rs" }
 #依赖本地 lib
 #geometry = { path = "crates/geometry" }
 rand = { version = "0.8.0" }
@@ -56,12 +56,20 @@ toml = "0.7.6"
 lazy_static = "1.4.0"
 anyhow = "1.0.75"
 crossbeam = "0.8.2"
+thread_local = "1.1.8"
 
 #依赖来自于不同注册服务的同名包
 #需要的就是这个 foo package，虽然它被重命名为 bar 或 baz
 #foo = "0.1"
 #bar = { git = "https://github.com/example/project", package = "foo" }
 #baz = { version = "0.1", registry = "custom", package = "foo" }
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
 
 #如果没有在Cargo.toml里定义集成测试的入口，那么tests目录(不包括子目录)下的每个rs文件被当作集成测试入口.
 #如果在Cargo.toml里定义了集成测试入口，那么定义的那些rs就是入口，不再默认指定任何集成测试入口
@@ -86,8 +94,8 @@ path = "src/bin/bin1.rs"
 
 #当项目的 Cargo.toml 文件中没有显式增加任何 [profile.*] 部分的时候，Cargo 会对每一个配置都采用默认设置。
 #通过增加任何希望定制的配置对应的 [profile.*] 部分，我们可以选择覆盖任意默认设置的子集
-[profile.dev]
-opt-level = 0
+#[profile.dev]
+#opt-level = 0
 
-[profile.release]
-opt-level = 3
+#[profile.release]
+#opt-level = 3

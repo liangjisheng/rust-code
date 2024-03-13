@@ -9,8 +9,6 @@ use std::sync::Mutex;
 use lazy_static::lazy_static;
 use rand::Rng;
 
-static PACKETS_SERVED: AtomicUsize = AtomicUsize::new(0);
-
 // Rust 对全局变量的使用有许多限制。包括
 // 全局变量必须在声明的时候马上初始化
 // 全局变量的初始化必须是简单赋值，不能包括复杂的表达式、语句和函数调用
@@ -21,13 +19,16 @@ static PACKETS_SERVED: AtomicUsize = AtomicUsize::new(0);
 // Rust 不允许用户在 main 函数之前或者之后执行自己的代码。所以，
 // 比较复杂的 static 变量的初始化，一般需要使用 lazy 方式，在第一次使用的时候初始化
 
-static GLOBAL: i32 = 0;
 // 使用 const 声明的是常量，而不是变量。它与 static 变量的最大区别在于，
 // 编译器并不一定会给 const 常量分配内存空间，在编译过程中，它很可能会被内联优化
+// 所以在不同地方对同一常量的引用并不能保证引用到相同的内存地址
 const GLOBAL_1: i32 = 1;
 
+static GLOBAL: i32 = 0;
 //可变全局变量无论读写都必须用 unsafe 修饰。
 static mut G2: i32 = 4;
+
+static PACKETS_SERVED: AtomicUsize = AtomicUsize::new(0);
 
 // 运行期初始化
 // 通过lazy_static宏定义的变量可以使用任何表达式来初始化
@@ -36,6 +37,7 @@ static mut G2: i32 = 4;
 
 // 使用lazy_static在每次访问静态变量时，会有轻微的性能损失，因为其内部实现用了一个底层的并发原语
 // std::sync::Once，在每次访问该变量时，程序都会执行一次原子指令用于确认静态变量的初始化是否完成
+// lazy_static宏，匹配的是static ref，所以定义的静态变量都是不可变引用
 
 lazy_static! {
     static ref HOSTNAME: Mutex<String> = Mutex::new(String::new());
@@ -48,7 +50,7 @@ lazy_static! {
     };
     static ref COUNT: usize = HASHMAP.len();
     static ref NUMBER: u32 = times_two(21);
-    static ref NAMES: Mutex<String> = Mutex::new(String::from("Sunface, Jack, Allen"));
+    static ref NAMES: Mutex<String> = Mutex::new(String::from("Alice, Jack, Allen"));
 }
 
 fn times_two(n: u32) -> u32 {
@@ -171,7 +173,7 @@ fn f4() {
 }
 
 // Rust为我们提供了Box::leak方法，它可以将一个变量从内存中泄漏(听上去怪怪的，竟然做主动内存泄漏)
-// 然后将其变为'static生命周期，最终该变量将和程序活得一样久，因此可以赋值给全局静态变量CONFIG
+// 然后将其变为 'static 生命周期，最终该变量将和程序活得一样久，因此可以赋值给全局静态变量CONFIG
 
 #[derive(Debug, Clone)]
 struct Config {
@@ -188,7 +190,7 @@ fn init() -> Option<&'static mut Config> {
         b: "B".to_string(),
     });
 
-    //将值泄露出去，声明周期变成 `'static`
+    // 将`c`从内存中泄漏，变成`'static`生命周期
     Some(Box::leak(c))
 }
 

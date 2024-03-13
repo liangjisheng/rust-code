@@ -1,7 +1,7 @@
 // https://juejin.cn/post/7216217118588747837
 
 // future_timer.rs
-use futures;
+// use futures;
 use std::{
     future::Future,
     pin::Pin,
@@ -78,3 +78,18 @@ impl TimerFuture {
 // thread::sleep(Duration::from_millis(500));
 // futures::executor::block_on(fut);
 // }
+
+pub fn add(left: usize, right: usize) -> usize {
+    left + right
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = add(2, 2);
+        assert_eq!(result, 4);
+    }
+}
