@@ -5,9 +5,9 @@ mod custom_layer;
 use custom_layer::CustomLayer;
 
 fn main() {
-    // 设置 `tracing-subscriber` 对 tracing 数据的处理方式
+    // Set up how `tracing-subscriber` will deal with tracing data.
     tracing_subscriber::registry().with(CustomLayer).init();
 
-    // 打印一条简单的日志。用 `tracing` 的行话来说，`info!` 将创建一个事件
+    // Log something simple. In `tracing` parlance, this creates an "event".
     info!(a_bool = true, answer = 42, message = "first example");
 }

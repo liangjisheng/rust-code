@@ -4,7 +4,8 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust course](https://course.rs/cargo/guide/why-exist.html)
+[rust course](https://course.rs/compiler/fight-with-compiler/lifetime/too-long1.html)
+[move](https://course.rs/profiling/performance/deep-into-move.html)
 [Rust 实践指南](https://books.niqin.com/read/rust-guide/zh-cn/5-algorithms/5.1-randomness/5.1.1-rand.html)
 [rust 专栏](https://juejin.cn/column/7220324089265438780)
 
@@ -15,6 +16,16 @@ tonic: n. 补药, adj. 滋补的
 [sled](https://github.com/spacejam/sled)
 [sea-orm](https://github.com/SeaQL/sea-orm)
 [sea-orm](https://www.sea-ql.org/SeaORM/)
+
+[纯Rust代码的SQL库](https://github.com/launchbadge/sqlx)
+[orm](https://github.com/rbatis/rbatis)
+[mysql derive](https://github.com/blackbeam/rust-mysql-simple)
+[redis](https://github.com/redis-rs/redis-rs)
+[csv](https://github.com/BurntSushi/rust-csv)
+[json](https://github.com/serde-rs/json)  
+[proto](https://github.com/tokio-rs/prost)  
+[toml](https://github.com/alexcrichton/toml-rs)
+[yaml](https://github.com/dtolnay/serde-yaml)
 
 ## data struct and algorithm
 
@@ -39,6 +50,7 @@ tonic: n. 补药, adj. 滋补的
 
 ## awesome
 
+[awesome-rust](https://github.com/rust-boom/rust-boom)  
 [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
 [rustwiki](https://rustwiki.org/)
 [rust learning](https://github.com/ctjhoa/rust-learning)

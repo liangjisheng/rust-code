@@ -1,5 +1,5 @@
+use env_logger::{fmt::Color, Builder, Env, Target};
 use log::{debug, error, info, trace, warn, LevelFilter};
-use env_logger::{fmt::Color, Builder, Env};
 
 use std::io::Write;
 
@@ -53,17 +53,44 @@ fn init_logger4() {
     // Builder::new().filter_level(LevelFilter::Info).init();
 }
 
+fn init_logger5() {
+    // 默认情况下，env_logger 会输出到标准错误 stderr，如果你想要输出到标准输出
+    // stdout，可以使用 Builder 来改变日志对象( target ):
+    Builder::from_default_env()
+        .target(Target::Stdout)
+        .filter_level(LevelFilter::Info)
+        .init();
+}
+
+struct Connection {
+    port: u32,
+    speed: f64,
+}
+
 fn main() {
     // init_logger1();
     // init_logger2();
     // init_logger3();
-    init_logger4();
+    // init_logger4();
+    init_logger5();
 
     trace!("some trace log");
     debug!("some debug log");
     info!("some information log");
     warn!("some warning log");
     error!("some error log");
+
+    let conn_info = Connection {
+        port: 40,
+        speed: 3.20,
+    };
+
+    info!(
+        "Connected to port {} at {} Mb/s",
+        conn_info.port, conn_info.speed
+    );
+    info!(target: "connection_events", "Successful connection, port: {}, speed: {}",
+      conn_info.port, conn_info.speed);
 }
 
 /*

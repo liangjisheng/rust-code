@@ -1,5 +1,7 @@
 # rust
 
+[cargo 进阶](https://course.rs/cargo/reference/specify-deps.html)
+
 目前国内 Rust 工具链镜像源，可以将其存储到系统环境的个性化设置文件中，如 .bashrc 或 .profile
 rustup 设置国内镜像源
 
@@ -124,6 +126,9 @@ cargo check
 #的二进制文件都安装到 Rust 安装根目录的 bin 文件夹中
 #如果需要一次安装多个，通过空格分隔即可
 cargo install ripgrep mdbook
+
+#更新包的版本
+cargo update rand
 ```
 
 test

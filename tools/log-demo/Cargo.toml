@@ -4,5 +4,6 @@ members = [
     "pretty-env-logger-demo",
     "env-logger-demo",
     "log4rs-demo",
+    "tracing-demo",
 ]
 resolver = "2"
