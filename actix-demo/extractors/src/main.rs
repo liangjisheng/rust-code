@@ -15,7 +15,7 @@ async fn index(info: web::Json<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
-// curl -X POST "http://127.0.0.1:8080/" -d '{ "username":"ljs" }' -H "Content-Type: application/json"
+// curl -X POST "http://127.0.0.1:8080/" -d '{ "username":"alice" }' -H "Content-Type: application/json"
 
 // You may also manually load the payload into memory and then deserialize it.
 
@@ -64,7 +64,7 @@ async fn index2(name: web::Path<String>) -> Result<impl Responder> {
     Ok(web::Json(obj))
 }
 
-// curl "http://127.0.0.1:8080/a/ljs"
+// curl "http://127.0.0.1:8080/a/alice"
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -90,7 +90,7 @@ mod tests {
     async fn test_index_get() {
         let app = test::init_service(App::new().service(index2)).await;
         let req = test::TestRequest::get()
-            .uri("/a/ljs")
+            .uri("/a/alice")
             .insert_header(ContentType::plaintext())
             .to_request();
         let resp = test::call_service(&app, req).await;
@@ -105,7 +105,7 @@ mod tests {
     #[actix_web::test]
     async fn test_index_post() {
         let app = test::init_service(App::new().service(index3)).await;
-        let req = test::TestRequest::post().uri("/a/ljs").to_request();
+        let req = test::TestRequest::post().uri("/a/alice").to_request();
         let resp = test::call_service(&app, req).await;
         assert!(resp.status().is_client_error());
     }

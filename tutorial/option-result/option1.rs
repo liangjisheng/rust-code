@@ -108,7 +108,73 @@ fn o2() {
     print_size(CarType::Sedan);
 }
 
+fn option3() {
+    // 可以使用 is_some 和 is_none 方法来判断 Option 中是否存在值
+    let some_value: Option<i32> = Some(5);
+    let none_value: Option<i32> = None;
+
+    println!("some_value is {}", some_value.is_some());
+    println!("none_value is {}", none_value.is_none());
+
+    // 可以使用 map 方法来对 Option 中的值进行转换。如果 Option 中不存在值，
+    // 则 map 方法不会执行
+    let some_value: Option<i32> = Some(5);
+    let new_value = some_value.map(|value| value * 2);
+    println!("The new value is {:?}", new_value);
+
+    // 可以使用 and_then 方法来对 Option 中的值进行操作，并返回一个新的 Option。
+    // 如果 Option 中不存在值，则 and_then 方法不会执行
+    let some_value: Option<i32> = Some(5);
+    let new_value = some_value.and_then(|value| Some(value * 2));
+    println!("The new value is {:?}", new_value);
+
+    // 可以使用 or 和 or_else 方法来获取一个默认值，如果 Option 中存在值，则返回
+    // Option 中的值，否则返回默认值。
+    let some_value: Option<i32> = Some(5);
+    let none_value: Option<i32> = None;
+
+    let new_value = some_value.or(Some(10));
+    println!("The new value is {:?}", new_value);
+
+    let new_value = none_value.or(Some(10));
+    println!("The new value is {:?}", new_value);
+
+    let new_value = none_value.or_else(|| Some(10));
+    println!("The new value is {:?}", new_value);
+
+    // 可以使用 filter 方法来过滤 Option 中的值，返回一个新的 Option。如果 Option
+    // 中不存在值，或者值不符合条件，则返回空 Option。
+    let some_value: Option<i32> = Some(5);
+
+    let new_value = some_value.filter(|value| *value > 3);
+    println!("The new value is {:?}", new_value);
+
+    let new_value = some_value.filter(|value| *value > 10);
+    println!("The new value is {:?}", new_value);
+
+    // 可以使用 take 方法来获取 Option 中的值，并将 Option 中的值设置为 None。
+    // 这个方法在需要获取 Option 中的值并清空 Option 时非常有用。
+    let mut some_value: Option<i32> = Some(5);
+
+    let value = some_value.take();
+    println!("The value is {:?}", value);
+    println!("The new Option is {:?}", some_value);
+
+    // 在 Rust 中，可以使用 unwrap_or 方法来获取 Option 中的值，如果 Option 中不存在值，
+    // 则返回一个默认值。这个方法非常方便，可以避免使用 match 表达式和 if let 语句来判断
+    // Option 中是否存在值。
+    let some_value: Option<i32> = Some(5);
+    let none_value: Option<i32> = None;
+
+    let new_value = some_value.unwrap_or(10);
+    println!("The new value is {}", new_value);
+
+    let new_value = none_value.unwrap_or(10);
+    println!("The new value is {}", new_value);
+}
+
 fn main() {
     // o1();
-    o2();
+    // o2();
+    option3();
 }

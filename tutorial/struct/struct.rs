@@ -25,7 +25,7 @@ fn struct1() {
         username: String::from("alice"),
         age: 18,
     };
-    print!("我是: {}, 永远 {}\n", user1.username, user1.age); // 我是: ljs, 永远 18
+    print!("我是: {}, 永远 {}\n", user1.username, user1.age); // 我是: alice, 永远 18
     user1.info();
 
     let user1 = User {

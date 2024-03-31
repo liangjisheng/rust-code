@@ -1,6 +1,6 @@
+use chrono::Local;
 use env_logger::{fmt::Color, Builder, Env, Target};
 use log::{debug, error, info, trace, warn, LevelFilter};
-
 use std::io::Write;
 
 fn init_logger1() {
@@ -37,11 +37,19 @@ fn init_logger3() {
 
             let timestamp = buf.timestamp();
 
+            // writeln!(
+            //     buf,
+            //     "My formatted log ({}): {}",
+            //     timestamp,
+            //     style.value(record.args())
+            // )
+
             writeln!(
                 buf,
-                "My formatted log ({}): {}",
-                timestamp,
-                style.value(record.args())
+                "{} [{}] - {}",
+                Local::now().format("%Y-%m-%dT%H:%M:%S"),
+                record.level(),
+                record.args()
             )
         })
         .init();
@@ -70,9 +78,9 @@ struct Connection {
 fn main() {
     // init_logger1();
     // init_logger2();
-    // init_logger3();
+    init_logger3();
     // init_logger4();
-    init_logger5();
+    // init_logger5();
 
     trace!("some trace log");
     debug!("some debug log");

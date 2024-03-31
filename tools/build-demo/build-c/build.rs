@@ -44,4 +44,19 @@
 fn main() {
     cc::Build::new().file("src/hello.c").compile("hello");
     println!("cargo:rerun-if-changed=src/hello.c");
+
+    cc::Build::new()
+        .cpp(true)
+        .file("src/foo.cpp")
+        .compile("foo");
+
+    cc::Build::new()
+        .define("APP_NAME", "\"foo\"")
+        .define(
+            "VERSION",
+            format!("\"{}\"", env!("CARGO_PKG_VERSION")).as_str(),
+        )
+        .define("WELCOME", None)
+        .file("src/foo.c")
+        .compile("foo");
 }

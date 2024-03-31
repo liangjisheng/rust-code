@@ -114,10 +114,22 @@ fn print_pro<T: Display>(t: T) {
     println!("{}", t);
 }
 
+// 使用where关键字来指定泛型约束
+fn print<T>(x: T)
+where
+    T: Display,
+{
+    println!("{}", x);
+}
+
 fn g3() {
     print_pro(10 as u8);
     print_pro(20 as u16);
     print_pro("Hello TutorialsPoint");
+
+    print(10 as u8);
+    print(20 as u8);
+    print("alice");
 }
 
 // const 泛型（Rust 1.51 版本引入的重要特性）, 针对值的泛型
@@ -172,7 +184,7 @@ fn d3() {
 fn main() {
     // g1();
     // g2();
-    // g3();
+    g3();
 
     // d1();
     // d2();

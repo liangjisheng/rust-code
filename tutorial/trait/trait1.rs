@@ -28,7 +28,7 @@ impl Person for Worker {
 
 fn main() {
     let w = Worker {
-        name: String::from("ljs"),
+        name: String::from("alice"),
         age: 20,
     };
     println!("{}", w.intro_author());

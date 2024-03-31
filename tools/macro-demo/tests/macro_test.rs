@@ -31,7 +31,7 @@ fn test_attribute_macro() {
     let demo = H {};
 
     let v1 = Hello {
-        name: String::from("ljs"),
+        name: String::from("alice"),
     };
 
     invoke();

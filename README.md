@@ -4,28 +4,21 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[rust course](https://course.rs/compiler/fight-with-compiler/lifetime/too-long1.html)
-[move](https://course.rs/profiling/performance/deep-into-move.html)
-[Rust 实践指南](https://books.niqin.com/read/rust-guide/zh-cn/5-algorithms/5.1-randomness/5.1.1-rand.html)
-[rust 专栏](https://juejin.cn/column/7220324089265438780)
-
-[rustls](https://crates.io/crates/rustls)
+[database](https://books.niqin.com/read/rust-guide/zh-cn/11-database/11.1-driver/11.1.1-sqlite/11.1.1.1-initialization.html)
 [orm](https://juejin.cn/post/7255513860264919098)
 [diesel](https://diesel.rs/)
 [diesel](https://github.com/diesel-rs/diesel)
 [sled](https://github.com/spacejam/sled)
-[sea-orm](https://github.com/SeaQL/sea-orm)
-[sea-orm](https://www.sea-ql.org/SeaORM/)
-
+[seaorm](https://github.com/SeaQL/sea-orm)
+[seaorm](https://www.sea-ql.org/SeaORM/)
+[seaorm](https://juejin.cn/post/7239502215889879077)
+[seaorm](https://juejin.cn/post/7238999195826225208)
 [纯Rust代码的SQL库](https://github.com/launchbadge/sqlx)
 [orm](https://github.com/rbatis/rbatis)
 [mysql derive](https://github.com/blackbeam/rust-mysql-simple)
-[redis](https://github.com/redis-rs/redis-rs)
-[csv](https://github.com/BurntSushi/rust-csv)
-[json](https://github.com/serde-rs/json)  
-[proto](https://github.com/tokio-rs/prost)  
-[toml](https://github.com/alexcrichton/toml-rs)
-[yaml](https://github.com/dtolnay/serde-yaml)
+[mysql](https://juejin.cn/post/7221357811287294008)
+[mysql](https://juejin.cn/post/7239739777688092728)
+[r2d2](https://juejin.cn/post/7228249682715754551)
 
 ## data struct and algorithm
 
@@ -64,6 +57,7 @@ tonic: n. 补药, adj. 滋补的
 [Rust 入门秘籍](https://rust-book.junmajinlong.com/about.html)
 [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
 [Rust 语言圣经 Rust Course](https://course.rs/about-book.html)
+[Rust 实践指南](https://books.niqin.com/read/rust-guide/zh-cn/index.html)
 
 [Rust Cookbook 中文版](https://rustwiki.org/zh-CN/rust-cookbook/intro.html)
 [Rust 项目实操](https://www.bilibili.com/video/BV1A24y127iS/)

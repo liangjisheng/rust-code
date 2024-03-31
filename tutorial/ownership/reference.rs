@@ -7,6 +7,7 @@
 fn main() {
     let s1 = String::from("hello");
     let len = str_length(&s1);
+    //这里使用 s1, len 的时候, 编译器会自动为我们创建一个指向 s1 和 len 的引用
     println!("The length of '{}' is {}.", s1, len);
 
     let mut str = String::from("Imagine");

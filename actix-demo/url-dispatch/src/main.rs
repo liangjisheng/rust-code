@@ -116,4 +116,4 @@ async fn main() -> std::io::Result<()> {
 
 // curl "http://127.0.0.1:8080/"
 // curl -X POST "http://127.0.0.1:8080/user"
-// curl "http://127.0.0.1:8080/user/ljs"
+// curl "http://127.0.0.1:8080/user/alice"

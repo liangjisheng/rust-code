@@ -16,14 +16,14 @@ async fn submit(info: web::Json<Info>) -> Result<String> {
     Ok(format!("Welcome {}!", info.username))
 }
 
-// curl -X POST "http://127.0.0.1:8080/submit" -d '{ "username":"ljs" }' -H "Content-Type: application/json"
+// curl -X POST "http://127.0.0.1:8080/submit" -d '{ "username":"alice" }' -H "Content-Type: application/json"
 
 /// deserialize `Info` from request's body, max payload size is 4kb
 async fn index(info: web::Json<Info>) -> impl Responder {
     format!("Welcome {}!", info.username)
 }
 
-// curl -X POST "http://127.0.0.1:8080/" -d '{ "username":"ljs" }' -H "Content-Type: application/json"
+// curl -X POST "http://127.0.0.1:8080/" -d '{ "username":"alice" }' -H "Content-Type: application/json"
 
 // Some extractors provide a way to configure the extraction process.
 // To configure an extractor, pass its configuration object to the
@@ -44,7 +44,7 @@ async fn form_data(form: web::Form<FormData>) -> Result<String> {
     Ok(format!("Welcome {}!", form.username))
 }
 
-// curl -X POST "http://127.0.0.1:8080/form" -d 'username=ljs1' -H "Content-Type: application/x-www-form-urlencoded"
+// curl -X POST "http://127.0.0.1:8080/form" -d 'username=alice' -H "Content-Type: application/x-www-form-urlencoded"
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

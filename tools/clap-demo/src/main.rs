@@ -15,7 +15,7 @@ struct Args {
 }
 
 #[derive(Parser)]
-#[command(name="MyApp", author="ljs", version="1.0", about="Does awesome things", long_about=None)]
+#[command(name="MyApp", author="alice", version="1.0", about="Does awesome things", long_about=None)]
 // #[command(next_line_help = true)] // 注释单独输出一行
 struct Cli {
     /// 123456
@@ -55,13 +55,13 @@ fn main() {
     println!("two: {:?}", cli.two);
     println!("one: {:?}", cli.one);
 
-    // cargo run -- --one 1 --two 2 --name ljs
+    // cargo run -- --one 1 --two 2 --name alice
     println!("name: {:?}", cli.name.as_deref());
 
     // cargo run -- --one 1 --two 2 --verbose
     println!("verbose: {:?}", cli.verbose);
 
-    // cargo run -- --one 1 --two 2 add ljs
+    // cargo run -- --one 1 --two 2 --name alice --verbose add alice
     // You can check for the existence of subcommands, and if found use their
     // matches just as you would the top level cmd
     match &cli.command {

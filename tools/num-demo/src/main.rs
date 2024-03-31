@@ -1,13 +1,15 @@
 use num::bigint::Sign::{Minus, NoSign, Plus};
+use num::bigint::ToBigInt;
 use num::BigInt;
 use num::Num;
 use num::Zero;
 
 fn main() {
-    test_from_bytes_be();
-    test_to_bytes_be();
-    test_from_bytes_le();
-    test_to_bytes_le();
+    // test_from_bytes_be();
+    // test_to_bytes_be();
+    // test_from_bytes_le();
+    // test_to_bytes_le();
+    println!("{}! equals {}", 100, factorial(100));
 }
 
 fn test_from_bytes_be() {
@@ -74,4 +76,15 @@ fn test_to_bytes_le() {
     // Test with leading/trailing zero bytes and a full BigDigit of value 0
     let b = BigInt::from_str_radix("00010000000000000200", 16).unwrap();
     assert_eq!(b.to_bytes_le(), (Plus, vec![0, 2, 0, 0, 0, 0, 0, 0, 1]));
+}
+
+fn factorial(x: i32) -> BigInt {
+    if let Some(mut factorial) = 1.to_bigint() {
+        for i in 1..(x + 1) {
+            factorial = factorial * i;
+        }
+        factorial
+    } else {
+        panic!("Failed to calculate factorial!");
+    }
 }

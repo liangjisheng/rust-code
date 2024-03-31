@@ -58,7 +58,7 @@ fn main() {
     // 在特定作用域中数据有且只有一个可变引用，好处是在编译时即可避免数据竞争
     let mut s1 = String::from("hello");
     do_something3(&mut s1);
-    print!("s1: {} \n", s1); // s1: hello ljs
+    print!("s1: {} \n", s1); // s1: hello alice
 
     let mut val = 1;
     add_one(&mut val);
@@ -80,8 +80,8 @@ fn do_something2(s: &String) {
 } // s 离开作用域，但其没有拥有引用值的所有权，这里也不会发生什么...
 
 fn do_something3(s: &mut String) {
-    s.push_str(" ljs");
-    println!("do_something3->s: {} \n", s); // do_something3->s: hello ljs
+    s.push_str(" alice");
+    println!("do_something3->s: {} \n", s); // do_something3->s: hello alice
 }
 
 fn add_one(e: &mut i32) {

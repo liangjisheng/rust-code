@@ -25,9 +25,9 @@ install (需要科学上网)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 #更新到最新稳定版本
-rustup default stable
-
 rustup update
+
+rustup default stable
 rustup self uninstall
 ```
 
@@ -104,8 +104,6 @@ cargo build --bin xxx
 cargo run --bin package-name
 cargo run --bin xxx
 
-cargo run --example ex1
-
 #生成的 HTML 文档放入 target/doc 目录
 cargo doc
 #生成 crate 文档并打开
@@ -131,6 +129,12 @@ cargo install ripgrep mdbook
 cargo update rand
 ```
 
+examples
+
+```shell
+cargo run --example ex1
+```
+
 test
 
 ```shell
@@ -151,6 +155,9 @@ cargo test one_hundred
 
 #使用 cargo test 的 --test 后跟文件的名称来运行某个特定集成测试文件中的所有测试
 cargo test --test integration_test
+
+#cargo test为何使用新线程？因为它需要并行的运行测试用例，与之相反，cargo bench只需要
+# 顺序的执行，因此 main 线程足矣
 ```
 
 ## bench

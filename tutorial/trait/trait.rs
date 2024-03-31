@@ -37,14 +37,14 @@ pub fn print_intro(item: impl Person) {
 // trait 做为返回值
 fn returns_intro() -> impl Person {
     Worker {
-        name: String::from("ljs"),
+        name: String::from("alice"),
         age: 20,
     }
 }
 
 fn t1() {
     let w = Worker {
-        name: String::from("ljs"),
+        name: String::from("alice"),
         age: 20,
     };
     println!("{}", w.intro());

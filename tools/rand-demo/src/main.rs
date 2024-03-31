@@ -5,7 +5,8 @@
 use rand::distributions::{Alphanumeric, Distribution, Standard, Uniform};
 use rand::Rng;
 
-fn r1() {
+fn number_demo() {
+    // 由系统创建的本地线程，是延迟初始化的随机数生成器
     let mut rng = rand::thread_rng();
 
     let n1: u8 = rng.gen();
@@ -19,9 +20,19 @@ fn r1() {
     // 用 Rng::gen_range ，在半开放 [0, 10) 范围（不包括 10 ）生成随机值
     println!("Integer: {}", rng.gen_range(0..10));
     println!("Float: {}", rng.gen_range(0.0..10.0));
+
+    println!("{:?}", rng.gen::<(f64, bool)>());
+    let tuple: (u8, i32, char) = rng.gen(); // arbitrary tuple support
+    println!("{:?}", tuple);
+
+    let arr1: [f32; 32] = rng.gen(); // array construction
+    println!("{:?}", arr1);
+    let mut arr2 = [0u8; 128];
+    rng.fill(&mut arr2);
+    println!("{:?}", arr2);
 }
 
-fn r2() {
+fn uniform_demo() {
     // Uniform 可以用来获得均匀分布的值。下面的代码是相同作用，
     // 但是当在相同范围内，重复生成数字时可能更快
     let mut rng = rand::thread_rng();
@@ -63,6 +74,7 @@ fn r3() {
 
 fn r4() {
     // 从一组字母+数字的字符，创建随机密码
+    // rand::distributions::Alphanumeric 是字母数字样本，范围限定为 A-Z，a-z，0-9
     let rand_string: Vec<u8> = rand::thread_rng()
         .sample_iter(&Alphanumeric)
         .take(30)
@@ -84,8 +96,9 @@ fn r5() {
     let password: Vec<char> = (0..PASSWORD_LEN)
         .map(|_| {
             let idx = rng.gen_range(0..CHARSET.len());
-            // 这是安全的，因为 `idx` 会在 `CHARSET` 的范围内。
-            char::from(unsafe { *CHARSET.get_unchecked(idx) }) // 来自用户的所有输入，最好都定义为不安全的。
+            // 这是安全的，因为 `idx` 会在 `CHARSET` 的范围内s
+            // 来自用户的所有输入，最好都定义为不安全的
+            char::from(unsafe { *CHARSET.get_unchecked(idx) })
         })
         .collect();
     println!("{:?}", password);
@@ -95,8 +108,8 @@ fn r5() {
 }
 
 fn main() {
-    // r1();
-    // r2();
+    // number_demo();
+    // uniform_demo();
     // r3();
     // r4();
     r5();

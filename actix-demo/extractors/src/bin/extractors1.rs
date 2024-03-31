@@ -19,7 +19,7 @@ async fn index(path: web::Path<(String, String)>, json: web::Json<MyInfo>) -> im
     format!("{} {} {} {}", path.0, path.1, json.id, json.username)
 }
 
-// curl -X POST "http://127.0.0.1:8080/index/path1/path2" -d '{ "id":1, "username":"ljs" }' -H "Content-Type: application/json"
+// curl -X POST "http://127.0.0.1:8080/index/path1/path2" -d '{ "id":1, "username":"alice" }' -H "Content-Type: application/json"
 
 // Path provides information that is extracted from the request's path.
 // Parts of the path that are extractable are called "dynamic segments"
@@ -35,7 +35,7 @@ async fn user_friend(path: web::Path<(u32, String)>) -> Result<String> {
     Ok(format!("Welcome {}, user_id {}!", friend, user_id))
 }
 
-// curl "http://127.0.0.1:8080/users/1/ljs"
+// curl "http://127.0.0.1:8080/users/1/alice"
 
 // It is also possible to extract path information to a type that implements
 // the Deserialize trait from serde by matching dynamic segment names with
@@ -55,7 +55,7 @@ async fn user_friend1(info: web::Path<Info>) -> Result<String> {
     ))
 }
 
-// curl "http://127.0.0.1:8080/users1/1/ljs"
+// curl "http://127.0.0.1:8080/users1/1/alice"
 
 // As a non-type-safe alternative, it's also possible to query
 // (see match_info docs) the request for path parameters by name within a handler:
@@ -67,7 +67,7 @@ async fn user_friend2(req: HttpRequest) -> Result<String> {
     Ok(format!("Welcome {}, user_id {}!", name, userid))
 }
 
-// curl "http://127.0.0.1:8080/users2/2/ljs2"
+// curl "http://127.0.0.1:8080/users2/2/alice"
 
 // The Query<T> type provides extraction functionality for the request's
 // query parameters. Underneath it uses serde_urlencoded crate.
@@ -84,7 +84,7 @@ async fn query(info: web::Query<Info1>) -> String {
     format!("Welcome {}!", info.username)
 }
 
-// curl "http://127.0.0.1:8080/query?username=ljs"
+// curl "http://127.0.0.1:8080/query?username=alice"
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

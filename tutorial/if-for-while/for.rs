@@ -60,7 +60,18 @@ fn for2() {
     }
 }
 
+fn for3() {
+    let mut v = vec![1, 2, 3];
+
+    // 在 for 循环中,v.len只会在循环伊始之时进行求值，之后就一直使用该值
+    for i in 0..v.len() {
+        v.push(i);
+        println!("{:?}", v);
+    }
+}
+
 fn main() {
     // for1();
-    for2();
+    // for2();
+    for3();
 }
