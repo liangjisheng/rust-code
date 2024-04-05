@@ -4,28 +4,6 @@ tokio (东京)(等同于 Tokyo)
 hyper 兴奋的，紧张的, Hyper-Threading 超线程
 tonic: n. 补药, adj. 滋补的
 
-[database](https://books.niqin.com/read/rust-guide/zh-cn/11-database/11.1-driver/11.1.1-sqlite/11.1.1.1-initialization.html)
-[orm](https://juejin.cn/post/7255513860264919098)
-[diesel](https://diesel.rs/)
-[diesel](https://github.com/diesel-rs/diesel)
-[sled](https://github.com/spacejam/sled)
-[seaorm](https://github.com/SeaQL/sea-orm)
-[seaorm](https://www.sea-ql.org/SeaORM/)
-[seaorm](https://juejin.cn/post/7239502215889879077)
-[seaorm](https://juejin.cn/post/7238999195826225208)
-[纯Rust代码的SQL库](https://github.com/launchbadge/sqlx)
-[orm](https://github.com/rbatis/rbatis)
-[mysql derive](https://github.com/blackbeam/rust-mysql-simple)
-[mysql](https://juejin.cn/post/7221357811287294008)
-[mysql](https://juejin.cn/post/7239739777688092728)
-[r2d2](https://juejin.cn/post/7228249682715754551)
-
-## data struct and algorithm
-
-[Rust DataStruct And Algorithm](https://github.com/QMHTMY/RustBook)
-[TheAlgorithms](https://github.com/TheAlgorithms/Rust)
-[Rust DataStruct And Algorithm](https://github.com/wangzheng0822/algo)
-
 ## rust official
 
 [crates](https://crates.io)
@@ -71,6 +49,12 @@ tonic: n. 补药, adj. 滋补的
 [wrap star 8.8k](https://github.com/seanmonstar/warp)
 [salvo star 2.5k](https://github.com/salvo-rs/salvo)
 [tide star 4.8k](https://github.com/http-rs/tide)
+
+## data struct and algorithm
+
+[Rust DataStruct And Algorithm](https://github.com/QMHTMY/RustBook)
+[TheAlgorithms](https://github.com/TheAlgorithms/Rust)
+[Rust DataStruct And Algorithm](https://github.com/wangzheng0822/algo)
 
 ## blockchain
 

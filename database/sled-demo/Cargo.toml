@@ -1,0 +1,11 @@
+[package]
+name = "sled-demo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+byteorder = { version = "1.5.0", features = ["i128"] }
+sled = "0.34.7"
+zerocopy = { version = "0.7.32", features = ["derive", "zerocopy-derive", "alloc", "simd"] }

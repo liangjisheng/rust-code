@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "bakery-backend",
+    "diesel_demo_step_1_mysql",
+    "migration",
+    "migration-auto", "mysql-simple", "sqlx-demo",
+    "sqlx-example-mysql-todos",
+]
+resolver = "2"

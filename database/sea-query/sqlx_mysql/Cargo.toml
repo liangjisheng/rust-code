@@ -1,0 +1,45 @@
+[workspace]
+# A separate workspace
+
+[package]
+name = "sea-query-sqlx-mysql-example"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+time = { version = "0.3", features = ["macros"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+serde_json = "1"
+rust_decimal = { version = "1" }
+bigdecimal = { version = "0.3" }
+async-std = { version = "1.8", features = [ "attributes" ] }
+sqlx = "0.7"
+sea-query = "0.30.7"
+sea-query-binder = { version = "0.5.0", features = [
+    "sqlx-mysql",
+    "with-chrono",
+    "with-json",
+    "with-rust_decimal",
+    "with-bigdecimal",
+    "with-uuid",
+    "with-time",
+    "runtime-async-std-native-tls",
+] }
+
+#sea-query = { path = "../../" }
+#sea-query-binder = { path = "../../sea-query-binder", features = [
+#    "sqlx-mysql",
+#    "with-chrono",
+#    "with-json",
+#    "with-rust_decimal",
+#    "with-bigdecimal",
+#    "with-uuid",
+#    "with-time",
+#    "runtime-async-std-native-tls",
+#] }
+
+# NOTE: if you are copying this example into your own project, use the following line instead:
+# sea-query = { version = "0" }
+# sea-query-binder = { version = "0", features = [...] }
