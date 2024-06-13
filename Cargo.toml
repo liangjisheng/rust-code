@@ -38,7 +38,20 @@ edition = "2021"
 default-run = "hello"
 
 [dependencies]
-#color = { git = "https://github.com/bjz/color-rs" }
+# 当 github 仓库下面有多个 Cargo.toml 文件，也就是有多个包时，直接写仓库的根 url 就行
+# Cargo 会去这个仓库下面找对应的包，不管包位于根目录下的那个路径
+# 参考: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+# regex-lite   = { git = "https://github.com/rust-lang/regex.git" }
+# regex-syntax = { git = "https://github.com/rust-lang/regex.git" }
+
+#color = { git = "https://github.com/bjz/color-rs", branch="main" }
+# a commit with a particular tag
+# regex = { git = "https://github.com/rust-lang/regex.git", tag = "1.10.3" }
+# a commit by its SHA1 hash
+# regex = { git = "https://github.com/rust-lang/regex.git", rev = "0c0990399270277832fbb5b91a1fa118e6f63dba" }
+# HEAD commit of PR 493
+# regex = { git = "https://github.com/rust-lang/regex.git", rev = "refs/pull/493/head" }
+
 #依赖本地 lib
 #geometry = { path = "crates/geometry" }
 rand = { version = "0.8.0" }
@@ -139,4 +152,3 @@ path = "src/bin/bin1.rs"
 
 #[target.'cfg(target_arch = "x86_64")'.dependencies]
 #native = { path = "native/x86_64" }
-

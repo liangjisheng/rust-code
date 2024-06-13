@@ -7,6 +7,10 @@
 [futures-rs](https://github.com/rust-lang/futures-rs)
 [smol](https://github.com/smol-rs/smol)
 
+## async runtime
+
+[monoio](https://github.com/bytedance/monoio)
+
 ## learned
 
 [async-book](https://suibianxiedianer.github.io/async-book/index.html)

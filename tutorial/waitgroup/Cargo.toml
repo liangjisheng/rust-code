@@ -1,0 +1,18 @@
+[package]
+name = "waitgroup"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1.37.0", features = ["full"] }
+wg = { version = "0.9", default_features = true, features = ["alloc", "future"] }
+
+## 如果你需要开发嵌入式
+#[dependencies]
+#wg = { version = "0.9", default_features = false, features = ["alloc"] }
+
+# no_std & future
+#[dependencies]
+#wg = { version = "0.9", default_features = false, features = ["alloc", "future"] }
